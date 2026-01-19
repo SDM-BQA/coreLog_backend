@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    // File mapping: src/ → dist/
+    "rootDir": "./src",
+    "outDir": "./dist",
+
+    // ESM + Node.js 20+ support
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "target": "ES2022",
+
+    // Node types for process.env, fs, etc.
+    "types": ["node"],
+
+    // ESM requires these
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+    // Debug + strict learning
+    "sourceMap": true,
+    "strict": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist/**"]
+}
