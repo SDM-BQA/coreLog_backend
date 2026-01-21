@@ -8,6 +8,7 @@ import connect_db from "./configs/database.config";
 import * as configs from "./configs/env.config";
 import { server_start_format } from "./constants/template-literals";
 import { BaseContext } from "@apollo/server";
+import { playground } from "./playground";
 
 const app = express();
 const GQL_URL = `/${configs.api_version}/graphql`;
@@ -18,8 +19,7 @@ interface MyContext extends BaseContext {
 
 
 async function bootstrap() {
-    console.log("connecting to DB...");
-    await connect_db();
+    
 
     const server = new ApolloServer<MyContext>({
         typeDefs,
@@ -50,6 +50,14 @@ async function bootstrap() {
     });
 }
 
-bootstrap().catch((err) => {
-    console.error("Failed to start server:", err);
-});
+console.log("connecting to DB...");
+connect_db().then(async() => {
+    try {
+        await bootstrap()
+    } catch (err) {
+        console.log(err);
+        
+    } finally {
+        playground()
+    }
+})
