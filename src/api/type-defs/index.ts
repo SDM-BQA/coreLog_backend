@@ -1,6 +1,7 @@
 import { mergeTypeDefs } from "@graphql-tools/merge";
 import { gql } from "apollo-server-express";
-import { test_type_def } from "./test.type-def";
+import { test_type_def } from "./test/test.type-def";
+import user_type_def from "./@user/user.type-def";
 
 const main_types = gql`
   scalar Number
@@ -12,6 +13,6 @@ const main_types = gql`
   }
 `;
 
-const type_defs = [main_types, test_type_def]
+const type_defs = [main_types, test_type_def, user_type_def];
 
-export default mergeTypeDefs(type_defs)
+export default mergeTypeDefs(type_defs);

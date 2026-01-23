@@ -9,10 +9,12 @@ import * as configs from "./configs/env.config";
 import { server_start_format } from "./constants/template-literals";
 import { BaseContext } from "@apollo/server";
 import { playground } from "./playground";
+import { makeExecutableSchema } from "@graphql-tools/schema";
+
 
 const app = express();
 const GQL_URL = `/${configs.api_version}/graphql`;
-
+const schema = makeExecutableSchema({ typeDefs, resolvers });
 interface MyContext extends BaseContext {
     req: express.Request;
 }
@@ -22,8 +24,7 @@ async function bootstrap() {
     
 
     const server = new ApolloServer<MyContext>({
-        typeDefs,
-        resolvers,
+        schema
     });
 
     await server.start();

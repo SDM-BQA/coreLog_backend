@@ -38,5 +38,6 @@ export const test_type_def = gql`
   extend type Mutation {
     updateDogBreed(input: UpdateDogBreedInput!): Dog
     updateCatBreed(input: UpdateCatBreedInput!): Cat
+    
   }
 `;
