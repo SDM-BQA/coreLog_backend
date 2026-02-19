@@ -17,6 +17,13 @@ export type Scalars = {
   Number: { input: any; output: any; }
 };
 
+export type AuthResponse = {
+  __typename?: 'AuthResponse';
+  accessToken: Scalars['String']['output'];
+  refreshToken: Scalars['String']['output'];
+  user: User;
+};
+
 export type Cat = {
   __typename?: 'Cat';
   _id?: Maybe<Scalars['ID']['output']>;
@@ -24,6 +31,16 @@ export type Cat = {
   breed?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
   owner?: Maybe<Owner>;
+};
+
+export type CreateUserInput = {
+  email_id: Scalars['String']['input'];
+  first_name: Scalars['String']['input'];
+  gender?: InputMaybe<Scalars['String']['input']>;
+  last_name: Scalars['String']['input'];
+  mobile_no?: InputMaybe<Scalars['String']['input']>;
+  password: Scalars['String']['input'];
+  profile_pic?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Dog = {
@@ -38,8 +55,14 @@ export type Dog = {
 export type Mutation = {
   __typename?: 'Mutation';
   _?: Maybe<Scalars['String']['output']>;
+  create_user_account: AuthResponse;
   updateCatBreed?: Maybe<Cat>;
   updateDogBreed?: Maybe<Dog>;
+};
+
+
+export type MutationCreate_User_AccountArgs = {
+  input: CreateUserInput;
 };
 
 
@@ -87,6 +110,18 @@ export type UpdateCatBreedInput = {
 export type UpdateDogBreedInput = {
   _id: Scalars['ID']['input'];
   breed: Scalars['String']['input'];
+};
+
+export type User = {
+  __typename?: 'User';
+  _id: Scalars['ID']['output'];
+  email_id: Scalars['String']['output'];
+  first_name: Scalars['String']['output'];
+  gender?: Maybe<Scalars['String']['output']>;
+  last_name: Scalars['String']['output'];
+  mobile_no?: Maybe<Scalars['String']['output']>;
+  profile_pic?: Maybe<Scalars['String']['output']>;
+  user_name?: Maybe<Scalars['String']['output']>;
 };
 
 
@@ -162,8 +197,10 @@ export type DirectiveResolverFn<TResult = Record<PropertyKey, never>, TParent = 
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
+  AuthResponse: ResolverTypeWrapper<AuthResponse>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
   Cat: ResolverTypeWrapper<Cat>;
+  CreateUserInput: CreateUserInput;
   Dog: ResolverTypeWrapper<Dog>;
   ID: ResolverTypeWrapper<Scalars['ID']['output']>;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
@@ -174,12 +211,15 @@ export type ResolversTypes = {
   String: ResolverTypeWrapper<Scalars['String']['output']>;
   UpdateCatBreedInput: UpdateCatBreedInput;
   UpdateDogBreedInput: UpdateDogBreedInput;
+  User: ResolverTypeWrapper<User>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
+  AuthResponse: AuthResponse;
   Boolean: Scalars['Boolean']['output'];
   Cat: Cat;
+  CreateUserInput: CreateUserInput;
   Dog: Dog;
   ID: Scalars['ID']['output'];
   Int: Scalars['Int']['output'];
@@ -190,6 +230,13 @@ export type ResolversParentTypes = {
   String: Scalars['String']['output'];
   UpdateCatBreedInput: UpdateCatBreedInput;
   UpdateDogBreedInput: UpdateDogBreedInput;
+  User: User;
+};
+
+export type AuthResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['AuthResponse'] = ResolversParentTypes['AuthResponse']> = {
+  accessToken?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  refreshToken?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  user?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
 };
 
 export type CatResolvers<ContextType = any, ParentType extends ResolversParentTypes['Cat'] = ResolversParentTypes['Cat']> = {
@@ -210,6 +257,7 @@ export type DogResolvers<ContextType = any, ParentType extends ResolversParentTy
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   _?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  create_user_account?: Resolver<ResolversTypes['AuthResponse'], ParentType, ContextType, RequireFields<MutationCreate_User_AccountArgs, 'input'>>;
   updateCatBreed?: Resolver<Maybe<ResolversTypes['Cat']>, ParentType, ContextType, RequireFields<MutationUpdateCatBreedArgs, 'input'>>;
   updateDogBreed?: Resolver<Maybe<ResolversTypes['Dog']>, ParentType, ContextType, RequireFields<MutationUpdateDogBreedArgs, 'input'>>;
 };
@@ -233,12 +281,25 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   getDogById?: Resolver<Maybe<ResolversTypes['Dog']>, ParentType, ContextType, RequireFields<QueryGetDogByIdArgs, '_id'>>;
 };
 
+export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
+  _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  email_id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  first_name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  gender?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  last_name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  mobile_no?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  profile_pic?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  user_name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+};
+
 export type Resolvers<ContextType = any> = {
+  AuthResponse?: AuthResponseResolvers<ContextType>;
   Cat?: CatResolvers<ContextType>;
   Dog?: DogResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Number?: GraphQLScalarType;
   Owner?: OwnerResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  User?: UserResolvers<ContextType>;
 };
 

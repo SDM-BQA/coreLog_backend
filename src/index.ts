@@ -14,15 +14,13 @@ import { makeExecutableSchema } from "@graphql-tools/schema";
 
 const app = express();
 const GQL_URL = `/${configs.api_version}/graphql`;
-const schema = makeExecutableSchema({ typeDefs, resolvers });
 interface MyContext extends BaseContext {
     req: express.Request;
 }
 
 
 async function bootstrap() {
-    
-
+    const schema = makeExecutableSchema({ typeDefs, resolvers });
     const server = new ApolloServer<MyContext>({
         schema
     });
@@ -46,19 +44,18 @@ async function bootstrap() {
         })
     );
 
-    app.listen({port: configs.port}, () => {
+    app.listen({ port: configs.port }, () => {
         console.log(server_start_format(configs.port, configs.api_version));
     });
 }
 
 console.log("connecting to DB...");
-connect_db().then(async() => {
+connect_db().then(async () => {
     try {
         await bootstrap()
+        playground()
     } catch (err) {
         console.log(err);
-        
-    } finally {
-        playground()
+
     }
 })

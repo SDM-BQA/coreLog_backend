@@ -1,6 +1,6 @@
 import { gql } from "apollo-server-express";
 
-export const test_type_def = gql`
+const test_type_def = gql`
   type Owner {
     _id: ID
     first_name: String
@@ -38,6 +38,7 @@ export const test_type_def = gql`
   extend type Mutation {
     updateDogBreed(input: UpdateDogBreedInput!): Dog
     updateCatBreed(input: UpdateCatBreedInput!): Cat
-    
   }
 `;
+
+export default test_type_def
