@@ -26,6 +26,7 @@ const user_type_def = gql`
     profile_pic: String
     mobile_no: String
     gender: String
+    user_name: String!
   }
 
   input UpdateUserInput {

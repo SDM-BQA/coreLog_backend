@@ -15,9 +15,9 @@ export const create_user_account = async (
             password: args_input.password,
             gender: args_input.gender,
             // profile_pic: args?.profile_pic || "/profile_pic.png",
-            profile_pic: args_input.profile_pic || "",
+            profile_pic:  "",
             mobile_no: args_input.mobile_no,
-            user_name: args_input.first_name.slice(0, 5) + "_" + args_input.last_name.slice(0, 5) + Math.floor(Math.random() * 1000),
+            user_name: args_input.user_name,
         });
 
         await newUser.save();

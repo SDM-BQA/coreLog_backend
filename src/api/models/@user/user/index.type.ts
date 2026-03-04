@@ -8,7 +8,7 @@ interface ProfileInfo{
     email_id: string;
     mobile_no?: string;
     password: string;
-    gender?: 'male' | 'female' | 'other' | 'prefer_not_to_say'
+    gender?: 'male' | 'female' | 'other' | 'N/A'
 }
 
 export type UserSchema = ProfileInfo & IDBDefault
