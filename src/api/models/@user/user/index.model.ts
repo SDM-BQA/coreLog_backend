@@ -24,6 +24,8 @@ const user_schema = new Schema<UserSchemaDocument, UserSchemaModel>(
         mobile_no: unique_text,
         password: required_text,
         gender: text,
+        otp_code: String,
+        otp_expires_at: Date,
     },
     {
         toJSON: { virtuals: true },

@@ -1,3 +1,6 @@
 export * from "./create-user-account"
 export * from "./update-user-account"
 export * from "./delete-user-account"
+export * from "./send-otp"
+export * from "./verify-otp"
+export * from "./login-user-account"

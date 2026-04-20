@@ -8,7 +8,9 @@ interface ProfileInfo{
     email_id: string;
     mobile_no?: string;
     password: string;
-    gender?: 'male' | 'female' | 'other' | 'N/A'
+    gender?: 'male' | 'female' | 'other' | 'N/A';
+    otp_code?: string;
+    otp_expires_at?: Date;
 }
 
 export type UserSchema = ProfileInfo & IDBDefault

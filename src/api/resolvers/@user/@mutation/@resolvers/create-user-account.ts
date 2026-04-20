@@ -14,8 +14,7 @@ export const create_user_account = async (
             email_id: args_input.email_id,
             password: args_input.password,
             gender: args_input.gender,
-            // profile_pic: args?.profile_pic || "/profile_pic.png",
-            profile_pic:  "",
+            profile_pic: args_input.profile_pic || "/profile_pic.jpg",
             mobile_no: args_input.mobile_no,
             user_name: args_input.user_name,
         });
