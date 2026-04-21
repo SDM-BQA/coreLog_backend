@@ -6,6 +6,7 @@ import {
     required_text,
     text,
     unique_text,
+    ref_id,
 } from "../../../../utils/mongo";
 import { toTitleCase } from "../../../../utils/misc/case.utils";
 import { Encryption } from "../../../../utils/misc/encryption.utils";
@@ -26,6 +27,11 @@ const user_schema = new Schema<UserSchemaDocument, UserSchemaModel>(
         gender: text,
         otp_code: String,
         otp_expires_at: Date,
+        library: {
+            books: [ref_id(models_constant.book)],
+            movies: [ref_id(models_constant.movie)],
+            series: [ref_id(models_constant.series)],
+        },
     },
     {
         toJSON: { virtuals: true },
