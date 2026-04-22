@@ -15,5 +15,7 @@ export interface BookSchema extends IDBDefault {
     language?: string;
     started_from?: string;
     finished_on?: string;
+    series_name?: string;
+    series_number?: number;
     user_id: MIDType;
 }

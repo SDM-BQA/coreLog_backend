@@ -35,6 +35,8 @@ const book_schema = new Schema<BookSchemaDocument, BookSchemaModel>(
         language: text,
         started_from: text,
         finished_on: text,
+        series_name: text,
+        series_number: { type: Number, default: null },
         user_id: { ...ref_id(models_constant.user), required: true },
     },
     {

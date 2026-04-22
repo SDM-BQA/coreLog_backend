@@ -17,6 +17,8 @@ const book_type_def = gql`
     language: String
     started_from: String
     finished_on: String
+    series_name: String
+    series_number: Int
     user_id: ID!
     created_at: String
     updated_at: String
@@ -37,6 +39,8 @@ const book_type_def = gql`
     language: String
     started_from: String
     finished_on: String
+    series_name: String
+    series_number: Int
   }
 
   input UpdateBookInput {
@@ -54,6 +58,8 @@ const book_type_def = gql`
     language: String
     started_from: String
     finished_on: String
+    series_name: String
+    series_number: Int
   }
 
   type BookPage {
