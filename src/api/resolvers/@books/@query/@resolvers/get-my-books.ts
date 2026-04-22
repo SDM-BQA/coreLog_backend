@@ -7,6 +7,7 @@ interface BookFilter {
     genres?: string[];
     status?: string[];
     rating?: number;
+    author?: string;
     page?: number;
     limit?: number;
 }
@@ -23,6 +24,7 @@ export const get_my_books = async (_parent: any, args: { filter?: BookFilter }, 
             match: {
                 ...(filter.genres?.length  && { genres: filter.genres }),
                 ...(filter.status?.length  && { status: filter.status }),
+                ...(filter.author          && { author: filter.author }),
             },
             min: {
                 ...(filter.rating != null && { rating: filter.rating }),
