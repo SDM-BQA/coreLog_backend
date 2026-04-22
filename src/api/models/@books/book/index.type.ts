@@ -13,5 +13,7 @@ export interface BookSchema extends IDBDefault {
     page_count?: number;
     publisher?: string;
     language?: string;
+    started_from?: string;
+    finished_on?: string;
     user_id: MIDType;
 }

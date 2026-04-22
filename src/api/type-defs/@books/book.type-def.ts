@@ -15,6 +15,8 @@ const book_type_def = gql`
     page_count: Int
     publisher: String
     language: String
+    started_from: String
+    finished_on: String
     user_id: ID!
     created_at: String
     updated_at: String
@@ -33,6 +35,8 @@ const book_type_def = gql`
     page_count: Int
     publisher: String
     language: String
+    started_from: String
+    finished_on: String
   }
 
   input UpdateBookInput {
@@ -48,12 +52,40 @@ const book_type_def = gql`
     page_count: Int
     publisher: String
     language: String
+    started_from: String
+    finished_on: String
+  }
+
+  type BookPage {
+    books: [Book]!
+    total_count: Int!
+    current_page: Int!
+    per_page: Int!
+    page_count: Int!
+    has_next_page: Boolean!
+  }
+
+  input BookFilterInput {
+    search: String
+    genres: [String]
+    status: [String]
+    rating: Float
+    author: String
+    page: Int
+    limit: Int
+  }
+
+  type BookFilters {
+    genres: [String!]!
+    statuses: [String!]!
+    authors: [String!]!
   }
 
   extend type Query {
     get_book(id: ID!): Book
-    get_my_books: [Book]
+    get_my_books(filter: BookFilterInput): BookPage!
     get_user_books(user_id: ID!): [Book]
+    get_book_filters: BookFilters!
   }
 
   extend type Mutation {

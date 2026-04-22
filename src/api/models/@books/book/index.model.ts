@@ -33,6 +33,8 @@ const book_schema = new Schema<BookSchemaDocument, BookSchemaModel>(
         page_count: { type: Number, default: 0 },
         publisher: text,
         language: text,
+        started_from: text,
+        finished_on: text,
         user_id: { ...ref_id(models_constant.user), required: true },
     },
     {
@@ -41,6 +43,11 @@ const book_schema = new Schema<BookSchemaDocument, BookSchemaModel>(
         ...create_update_timestamps,
     }
 );
+
+// Compound index for the server-side filtered query: user_id is always present,
+// status + genres are the most-used filters, title for text search fallback.
+book_schema.index({ user_id: 1, status: 1, genres: 1 });
+book_schema.index({ user_id: 1, title: "text", author: "text" });
 
 export const book_model = model<BookSchemaDocument, BookSchemaModel>(
     models_constant.book,
