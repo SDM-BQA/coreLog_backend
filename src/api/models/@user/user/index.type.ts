@@ -1,4 +1,10 @@
-import { IDBDefault } from "../../index.type";
+import { IDBDefault, MIDType } from "../../index.type";
+
+interface Library {
+    books: MIDType[];
+    movies: MIDType[];
+    series: MIDType[];
+}
 
 interface ProfileInfo{
     profile_pic?: string;
@@ -11,6 +17,7 @@ interface ProfileInfo{
     gender?: 'male' | 'female' | 'other' | 'N/A';
     otp_code?: string;
     otp_expires_at?: Date;
+    library: Library;
 }
 
 export type UserSchema = ProfileInfo & IDBDefault

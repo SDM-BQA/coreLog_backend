@@ -7,6 +7,12 @@ const user_type_def = gql`
     user: User!
   }
 
+  type Library {
+    books: [Book]
+    movies: [ID]
+    series: [ID]
+  }
+
   type User {
     _id: ID!
     first_name: String!
@@ -16,6 +22,7 @@ const user_type_def = gql`
     mobile_no: String
     user_name: String
     gender: String
+    library: Library
   }
 
   input CreateUserInput {
