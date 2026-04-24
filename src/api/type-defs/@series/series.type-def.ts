@@ -9,6 +9,9 @@ export const series_type_defs = gql`
         genres: [String!]!
         release_year: String!
         seasons: Int!
+        episodes: Int!
+        language: String
+        origin_country: String
         status: String!
         rating: Float!
         review: String
@@ -53,6 +56,9 @@ export const series_type_defs = gql`
         genres: [String!]!
         release_year: String!
         seasons: Int!
+        episodes: Int!
+        language: String!
+        origin_country: String!
         status: String!
         rating: Float!
         review: String
@@ -69,6 +75,9 @@ export const series_type_defs = gql`
         genres: [String!]
         release_year: String
         seasons: Int
+        episodes: Int
+        language: String
+        origin_country: String
         status: String
         rating: Float
         review: String

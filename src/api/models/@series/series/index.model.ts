@@ -22,6 +22,9 @@ const series_schema = new Schema<SeriesSchemaDocument, SeriesSchemaModel>(
         genres: { ...text_arr, required: true },
         release_year: required_text,
         seasons: { ...required_num, default: 1 },
+        episodes: { ...required_num, default: 0 },
+        language: text,
+        origin_country: text,
         status: {
             type: String,
             required: true,
@@ -45,7 +48,7 @@ const series_schema = new Schema<SeriesSchemaDocument, SeriesSchemaModel>(
 
 // Indexes for performance
 series_schema.index({ user_id: 1, status: 1, genres: 1 });
-series_schema.index({ user_id: 1, title: "text", creator: "text" });
+series_schema.index({ user_id: 1, title: "text", creator: "text" }, { language_override: "dummy" });
 
 export const series_model = model<SeriesSchemaDocument, SeriesSchemaModel>(
     models_constant.series,
