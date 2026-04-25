@@ -1,32 +1,34 @@
 import { get_auth_user } from "../../../../../utils/auth.utils";
-import { series_model } from "../../../../models/@series/series";
+import { movie_model } from "../../../../models/@movies/movie";
 import { quick_list } from "../../../../../utils/quick_list.utils";
 
-interface SeriesFilter {
+interface MovieFilter {
     search?: string;
     genres?: string[];
     status?: string[];
     rating?: number;
+    directors?: string[];
+    languages?: string[];
     platforms?: string[];
-    creator?: string;
     page?: number;
     limit?: number;
 }
 
-export const get_my_series = async (_parent: any, args: { filter?: SeriesFilter }, ctx: any) => {
+export const get_my_movies = async (_parent: any, args: { filter?: MovieFilter }, ctx: any) => {
     try {
         const user = await get_auth_user(ctx.req);
         const filter = args.filter ?? {};
 
-        const result = await quick_list(series_model, {
+        const result = await quick_list(movie_model, {
             base_query: { user_id: user._id },
             search: filter.search,
-            search_fields: ["title", "creator"],
+            search_fields: ["title", "director"],
             match: {
                 ...(filter.genres?.length    && { genres: filter.genres }),
                 ...(filter.status?.length    && { status: filter.status }),
+                ...(filter.directors?.length && { director: filter.directors }),
+                ...(filter.languages?.length && { language: filter.languages }),
                 ...(filter.platforms?.length && { platform: filter.platforms }),
-                ...(filter.creator           && { creator: filter.creator }),
             },
             min: {
                 ...(filter.rating != null && { rating: filter.rating }),
@@ -36,7 +38,7 @@ export const get_my_series = async (_parent: any, args: { filter?: SeriesFilter 
         });
 
         return {
-            series:        result.data,
+            movies:        result.data,
             total_count:  result.total_count,
             current_page: result.current_page,
             per_page:     result.per_page,
@@ -44,7 +46,7 @@ export const get_my_series = async (_parent: any, args: { filter?: SeriesFilter 
             has_next_page: result.has_next_page,
         };
     } catch (error: any) {
-        console.error("Get My Series Error:", error.message);
-        return { series: [], total_count: 0, current_page: 1, per_page: 10, page_count: 1, has_next_page: false };
+        console.error("Get My Movies Error:", error.message);
+        return { movies: [], total_count: 0, current_page: 1, per_page: 10, page_count: 1, has_next_page: false };
     }
 };

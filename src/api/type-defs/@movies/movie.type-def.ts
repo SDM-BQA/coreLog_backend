@@ -1,15 +1,14 @@
 import { gql } from "apollo-server-express";
 
-export const series_type_defs = gql`
-    type Series {
+export const movie_type_defs = gql`
+    type Movie {
         _id: ID!
         title: String!
-        creator: String
+        director: String
         description: String
         genres: [String!]!
         release_year: String!
-        seasons: Int!
-        episodes: Int!
+        runtime: Int!
         language: String
         origin_country: String
         status: String!
@@ -19,24 +18,33 @@ export const series_type_defs = gql`
         platform: String!
         started_from: String
         finished_on: String
+        tmdb_id: Int
+        original_title: String
+        poster_path: String
+        backdrop_path: String
+        adult: Boolean
+        video: Boolean
+        vote_average: Float
+        vote_count: Int
         user_id: ID!
         created_at: String
         updated_at: String
     }
 
-    input SeriesFilter {
+    input MovieFilter {
         search: String
         genres: [String!]
         status: [String!]
         rating: Float
-        platforms: [String]
-        creator: String
+        directors: [String!]
+        languages: [String!]
+        platforms: [String!]
         page: Int
         limit: Int
     }
 
-    type SeriesResponse {
-        series: [Series!]!
+    type MovieResponse {
+        movies: [Movie!]!
         total_count: Int!
         current_page: Int!
         per_page: Int!
@@ -44,21 +52,21 @@ export const series_type_defs = gql`
         has_next_page: Boolean!
     }
 
-    type SeriesFilters {
+    type MovieFilters {
         genres: [String!]!
         statuses: [String!]!
-        creators: [String!]!
+        directors: [String!]!
+        languages: [String!]!
         platforms: [String!]!
     }
 
-    input CreateSeriesInput {
+    input CreateMovieInput {
         title: String!
-        creator: String
+        director: String
         description: String
         genres: [String!]!
         release_year: String!
-        seasons: Int!
-        episodes: Int!
+        runtime: Int!
         language: String!
         origin_country: String!
         status: String!
@@ -68,16 +76,23 @@ export const series_type_defs = gql`
         platform: String!
         started_from: String
         finished_on: String
+        tmdb_id: Int
+        original_title: String
+        poster_path: String
+        backdrop_path: String
+        adult: Boolean
+        video: Boolean
+        vote_average: Float
+        vote_count: Int
     }
 
-    input UpdateSeriesInput {
+    input UpdateMovieInput {
         title: String
-        creator: String
+        director: String
         description: String
         genres: [String!]
         release_year: String
-        seasons: Int
-        episodes: Int
+        runtime: Int
         language: String
         origin_country: String
         status: String
@@ -87,17 +102,25 @@ export const series_type_defs = gql`
         platform: String
         started_from: String
         finished_on: String
+        tmdb_id: Int
+        original_title: String
+        poster_path: String
+        backdrop_path: String
+        adult: Boolean
+        video: Boolean
+        vote_average: Float
+        vote_count: Int
     }
 
     extend type Query {
-        get_my_series(filter: SeriesFilter): SeriesResponse!
-        get_series(id: ID!): Series
-        get_series_filters: SeriesFilters!
+        get_my_movies(filter: MovieFilter): MovieResponse!
+        get_movie(id: ID!): Movie
+        get_movie_filters: MovieFilters!
     }
 
     extend type Mutation {
-        create_series(input: CreateSeriesInput!): Series!
-        update_series(id: ID!, input: UpdateSeriesInput!): Series!
-        delete_series(id: ID!): Boolean!
+        create_movie(input: CreateMovieInput!): Movie!
+        update_movie(id: ID!, input: UpdateMovieInput!): Movie!
+        delete_movie(id: ID!): Boolean!
     }
 `;
