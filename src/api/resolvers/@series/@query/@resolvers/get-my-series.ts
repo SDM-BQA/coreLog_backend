@@ -7,6 +7,7 @@ interface SeriesFilter {
     genres?: string[];
     status?: string[];
     rating?: number;
+    platforms?: string[];
     creator?: string;
     page?: number;
     limit?: number;
@@ -22,9 +23,10 @@ export const get_my_series = async (_parent: any, args: { filter?: SeriesFilter 
             search: filter.search,
             search_fields: ["title", "creator"],
             match: {
-                ...(filter.genres?.length  && { genres: filter.genres }),
-                ...(filter.status?.length  && { status: filter.status }),
-                ...(filter.creator         && { creator: filter.creator }),
+                ...(filter.genres?.length    && { genres: filter.genres }),
+                ...(filter.status?.length    && { status: filter.status }),
+                ...(filter.platforms?.length && { platform: filter.platforms }),
+                ...(filter.creator           && { creator: filter.creator }),
             },
             min: {
                 ...(filter.rating != null && { rating: filter.rating }),

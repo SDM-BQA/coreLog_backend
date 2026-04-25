@@ -29,6 +29,7 @@ export const series_type_defs = gql`
         genres: [String!]
         status: [String!]
         rating: Float
+        platforms: [String]
         creator: String
         page: Int
         limit: Int
@@ -47,6 +48,7 @@ export const series_type_defs = gql`
         genres: [String!]!
         statuses: [String!]!
         creators: [String!]!
+        platforms: [String!]!
     }
 
     input CreateSeriesInput {

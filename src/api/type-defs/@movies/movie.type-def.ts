@@ -36,7 +36,9 @@ export const movie_type_defs = gql`
         genres: [String!]
         status: [String!]
         rating: Float
-        director: String
+        directors: [String!]
+        languages: [String!]
+        platforms: [String!]
         page: Int
         limit: Int
     }
@@ -54,6 +56,8 @@ export const movie_type_defs = gql`
         genres: [String!]!
         statuses: [String!]!
         directors: [String!]!
+        languages: [String!]!
+        platforms: [String!]!
     }
 
     input CreateMovieInput {

@@ -7,7 +7,9 @@ interface MovieFilter {
     genres?: string[];
     status?: string[];
     rating?: number;
-    director?: string;
+    directors?: string[];
+    languages?: string[];
+    platforms?: string[];
     page?: number;
     limit?: number;
 }
@@ -22,9 +24,11 @@ export const get_my_movies = async (_parent: any, args: { filter?: MovieFilter }
             search: filter.search,
             search_fields: ["title", "director"],
             match: {
-                ...(filter.genres?.length  && { genres: filter.genres }),
-                ...(filter.status?.length  && { status: filter.status }),
-                ...(filter.director        && { director: filter.director }),
+                ...(filter.genres?.length    && { genres: filter.genres }),
+                ...(filter.status?.length    && { status: filter.status }),
+                ...(filter.directors?.length && { director: filter.directors }),
+                ...(filter.languages?.length && { language: filter.languages }),
+                ...(filter.platforms?.length && { platform: filter.platforms }),
             },
             min: {
                 ...(filter.rating != null && { rating: filter.rating }),
