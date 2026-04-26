@@ -46,11 +46,20 @@ const user_type_def = gql`
     user_name: String
   }
 
+  type DashboardStats {
+    movies: Int!
+    series: Int!
+    books: Int!
+    poems: Int!
+    journal_entries: Int!
+  }
+
   extend type Query {
     get_user_account(id: ID!): User
     get_all_user_accounts: [User]
     check_email_exists(email: String!): Boolean
     check_username_exists(username: String!): Boolean
+    get_dashboard_stats: DashboardStats!
   }
 
   extend type Mutation {
