@@ -3,7 +3,8 @@ interface ModelType{
     book:"Book",
     movie: "Movie",
     series: "Series",
-    poem: "Poem"
+    poem: "Poem",
+    target: "Target"
 }
 
 export type ModelNames = ModelType[keyof ModelType];
@@ -14,5 +15,6 @@ export const models_constant: ModelType = {
     book: "Book",
     movie: "Movie",
     series: "Series",
-    poem: "Poem"
+    poem: "Poem",
+    target: "Target"
 }
