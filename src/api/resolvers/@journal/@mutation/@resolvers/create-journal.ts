@@ -1,5 +1,5 @@
 import { get_auth_user } from "../../../../../utils/auth.utils";
-import { journal_model } from "../../../../models/@journal";
+import { journal_model } from "../../../../models/@journal/journal";
 
 export const create_journal = async (_parent: any, args: { input: any }, ctx: any) => {
     try {

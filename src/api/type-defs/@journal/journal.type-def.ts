@@ -71,9 +71,17 @@ export const journal_type_defs = gql`
         is_favorite: Boolean
     }
 
+    type JournalFilters {
+        journal_types: [String!]!
+        moods: [String!]!
+        locations: [String!]!
+        tags: [String!]!
+    }
+
     extend type Query {
         get_my_journals(filter: JournalFilter): JournalResponse!
         get_journal(id: ID!): Journal
+        get_journal_filters: JournalFilters!
     }
 
     extend type Mutation {
@@ -82,3 +90,4 @@ export const journal_type_defs = gql`
         delete_journal(id: ID!): Boolean!
     }
 `;
+

@@ -1,45 +1,57 @@
 import { get_auth_user } from "../../../../../utils/auth.utils";
-import { journal_model } from "../../../../models/@journal";
+import { quick_list } from "../../../../../utils/quick_list.utils";
+import { journal_model } from "../../../../models/@journal/journal";
 
-export const get_my_journals = async (_parent: any, args: { filter?: any }, ctx: any) => {
+interface JournalFilter {
+    search?: string;
+    journal_type?: string;
+    mood?: string;
+    is_favorite?: boolean;
+    tags?: string[];
+    date_from?: string;
+    date_to?: string;
+    page?: number;
+    limit?: number;
+}
+
+export const get_my_journals = async (_parent: any, args: { filter?: JournalFilter }, ctx: any) => {
     try {
         const user = await get_auth_user(ctx.req);
         const f = args.filter ?? {};
-        const page = f.page ?? 1;
-        const limit = f.limit ?? 12;
-        const skip = (page - 1) * limit;
 
-        const query: Record<string, any> = { user_id: user._id };
-
-        if (f.search) {
-            query.$text = { $search: f.search };
-        }
-        if (f.journal_type) query.journal_type = f.journal_type;
-        if (f.mood) query.mood = f.mood;
-        if (f.is_favorite !== undefined && f.is_favorite !== null) query.is_favorite = f.is_favorite;
-        if (f.tags?.length) query.tags = { $in: f.tags };
+        const base_query: Record<string, any> = { user_id: user._id };
         if (f.date_from || f.date_to) {
-            query.date = {};
-            if (f.date_from) query.date.$gte = f.date_from;
-            if (f.date_to) query.date.$lte = f.date_to;
+            base_query.date = {};
+            if (f.date_from) base_query.date.$gte = f.date_from;
+            if (f.date_to) base_query.date.$lte = f.date_to;
         }
 
-        const [journals, total_count] = await Promise.all([
-            journal_model.find(query).sort({ date: -1, created_at: -1 }).skip(skip).limit(limit).lean(),
-            journal_model.countDocuments(query),
-        ]);
+        const result = await quick_list(journal_model, {
+            base_query,
+            search: f.search,
+            search_fields: ["title", "content"],
+            match: {
+                ...(f.journal_type && { journal_type: f.journal_type }),
+                ...(f.mood && { mood: f.mood }),
+                ...(f.is_favorite !== undefined && f.is_favorite !== null && { is_favorite: f.is_favorite }),
+                ...(f.tags?.length && { tags: f.tags }),
+            },
+            sort_by: "date",
+            sort_dir: -1,
+            page: f.page,
+            limit: f.limit,
+        });
 
-        const page_count = Math.ceil(total_count / limit);
         return {
-            journals,
-            total_count,
-            current_page: page,
-            per_page: limit,
-            page_count,
-            has_next_page: page < page_count,
+            journals: result.data,
+            total_count: result.total_count,
+            current_page: result.current_page,
+            per_page: result.per_page,
+            page_count: result.page_count,
+            has_next_page: result.has_next_page,
         };
     } catch (error: any) {
         console.error("Get My Journals Error:", error.message);
-        throw new Error(error.message);
+        return { journals: [], total_count: 0, current_page: 1, per_page: 10, page_count: 1, has_next_page: false };
     }
 };
