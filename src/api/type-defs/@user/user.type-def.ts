@@ -68,6 +68,7 @@ const user_type_def = gql`
     delete_user_account(id: ID!): Boolean,
     send_otp(email: String!): Boolean,
     verify_otp(email: String!, otp: String!): Boolean,
+    send_journal_pin_reset_otp(email: String!): Boolean,
     login_user_account(email_id: String!, password: String!): AuthResponse
   }
 `;
