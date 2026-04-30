@@ -4,6 +4,7 @@ interface Library {
     books: MIDType[];
     movies: MIDType[];
     series: MIDType[];
+    book_logs: MIDType[];
 }
 
 interface ProfileInfo{
