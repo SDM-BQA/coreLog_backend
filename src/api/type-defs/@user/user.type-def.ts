@@ -11,6 +11,7 @@ const user_type_def = gql`
     books: [Book]
     movies: [ID]
     series: [ID]
+    book_logs: [ID]
   }
 
   type User {

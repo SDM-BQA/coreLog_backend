@@ -87,17 +87,39 @@ const book_type_def = gql`
     authors: [String!]!
   }
 
+  type BookLog {
+    _id: ID!
+    book_id: ID!
+    user_id: ID!
+    date: String!
+    pages_read: Int!
+    current_page: Int!
+    note: String
+    created_at: String
+    updated_at: String
+  }
+
+  input BookLogInput {
+    date: String!
+    pages_read: Int!
+    current_page: Int!
+    note: String
+  }
+
   extend type Query {
     get_book(id: ID!): Book
     get_my_books(filter: BookFilterInput): BookPage!
     get_user_books(user_id: ID!): [Book]
     get_book_filters: BookFilters!
+    get_book_logs(book_id: ID!): [BookLog!]!
   }
 
   extend type Mutation {
     create_book(input: CreateBookInput!): Book
     update_book(id: ID!, input: UpdateBookInput!): Book
     delete_book(id: ID!): Boolean
+    add_book_log(book_id: ID!, input: BookLogInput!): BookLog!
+    delete_book_log(id: ID!): Boolean
   }
 `;
 
