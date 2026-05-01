@@ -25,7 +25,7 @@ export const create_book = async (_parent: any, args: any, ctx: any) => {
 
         // Update user's library
         if (!user.library) {
-            user.library = { books: [], movies: [], series: [], book_logs: [] };
+            user.library = { books: [], movies: [], series: [], book_logs: [], series_logs: [] };
         }
         user.library.books.push(newBook._id);
         await user.save();

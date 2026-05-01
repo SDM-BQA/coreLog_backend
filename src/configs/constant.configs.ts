@@ -4,6 +4,7 @@ interface ModelType{
     book_log: "BookLog",
     movie: "Movie",
     series: "Series",
+    series_log: "SeriesLog",
     poem: "Poem",
     target: "Target",
     journal: "Journal"
@@ -18,6 +19,7 @@ export const models_constant: ModelType = {
     book_log: "BookLog",
     movie: "Movie",
     series: "Series",
+    series_log: "SeriesLog",
     poem: "Poem",
     target: "Target",
     journal: "Journal"
