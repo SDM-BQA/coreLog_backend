@@ -89,15 +89,37 @@ export const series_type_defs = gql`
         finished_on: String
     }
 
+    type SeriesLog {
+        _id: ID!
+        series_id: ID!
+        user_id: ID!
+        date: String!
+        episodes_watched: Int!
+        current_episode: Int!
+        note: String
+        created_at: String
+        updated_at: String
+    }
+
+    input SeriesLogInput {
+        date: String!
+        episodes_watched: Int!
+        current_episode: Int!
+        note: String
+    }
+
     extend type Query {
         get_my_series(filter: SeriesFilter): SeriesResponse!
         get_series(id: ID!): Series
         get_series_filters: SeriesFilters!
+        get_series_logs(series_id: ID!): [SeriesLog!]!
     }
 
     extend type Mutation {
         create_series(input: CreateSeriesInput!): Series!
         update_series(id: ID!, input: UpdateSeriesInput!): Series!
         delete_series(id: ID!): Boolean!
+        add_series_log(series_id: ID!, input: SeriesLogInput!): SeriesLog!
+        delete_series_log(id: ID!): Boolean!
     }
 `;

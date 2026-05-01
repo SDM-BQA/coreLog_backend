@@ -32,6 +32,7 @@ const user_schema = new Schema<UserSchemaDocument, UserSchemaModel>(
             movies: [ref_id(models_constant.movie)],
             series: [ref_id(models_constant.series)],
             book_logs: [ref_id(models_constant.book_log)],
+            series_logs: [ref_id(models_constant.series_log)],
         },
     },
     {
