@@ -22,6 +22,7 @@ const series_schema = new Schema<SeriesSchemaDocument, SeriesSchemaModel>(
         genres: { ...text_arr, required: true },
         release_year: required_text,
         seasons: { ...required_num, default: 1 },
+        seasons_watched: { ...required_num, default: 0 },
         episodes: { ...required_num, default: 0 },
         language: text,
         origin_country: text,
