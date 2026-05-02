@@ -9,6 +9,7 @@ export const series_type_defs = gql`
         genres: [String!]!
         release_year: String!
         seasons: Int!
+        seasons_watched: Int
         episodes: Int!
         language: String
         origin_country: String
@@ -58,6 +59,7 @@ export const series_type_defs = gql`
         genres: [String!]!
         release_year: String!
         seasons: Int!
+        seasons_watched: Int
         episodes: Int!
         language: String!
         origin_country: String!
@@ -77,6 +79,7 @@ export const series_type_defs = gql`
         genres: [String!]
         release_year: String
         seasons: Int
+        seasons_watched: Int
         episodes: Int
         language: String
         origin_country: String
