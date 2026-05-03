@@ -30,8 +30,6 @@ const journal_schema = new Schema<JournalSchemaDocument, JournalSchemaModel>(
         user_id: { ...ref_id(models_constant.user), required: true },
     },
     {
-        toJSON: { virtuals: true },
-        toObject: { virtuals: true },
         ...create_update_timestamps,
     }
 );

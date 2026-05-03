@@ -36,8 +36,6 @@ const user_schema = new Schema<UserSchemaDocument, UserSchemaModel>(
         },
     },
     {
-        toJSON: { virtuals: true },
-        toObject: { virtuals: true },
         ...create_update_timestamps,
     },
 

@@ -22,8 +22,6 @@ const series_log_schema = new Schema<SeriesLogSchemaDocument, SeriesLogSchemaMod
         note: text,
     },
     {
-        toJSON: { virtuals: true },
-        toObject: { virtuals: true },
         ...create_update_timestamps,
     }
 );
