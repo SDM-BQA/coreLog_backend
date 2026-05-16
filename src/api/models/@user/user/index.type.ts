@@ -19,6 +19,12 @@ interface ProfileInfo{
     gender?: 'male' | 'female' | 'other' | 'N/A';
     otp_code?: string;
     otp_expires_at?: Date;
+    plan?: "free" | "inner_circle";
+    inner_circle_email?: string;
+    inner_circle_otp_code?: string;
+    inner_circle_otp_expires_at?: Date;
+    inner_circle_started_at?: Date;
+    inner_circle_expires_at?: Date;
     library: Library;
 }
 

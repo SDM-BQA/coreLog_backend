@@ -20,3 +20,16 @@ export const get_auth_user = async (req: any) => {
 
     return user;
 };
+
+export const require_inner_circle_user = async (req: any) => {
+    const user = await get_auth_user(req);
+
+    const expiresAt = user.inner_circle_expires_at ? new Date(user.inner_circle_expires_at) : null;
+    const isActive = user.plan === "inner_circle" && !!expiresAt && expiresAt.getTime() > Date.now();
+
+    if (!isActive) {
+        throw new Error("Inner Circle membership required");
+    }
+
+    return user;
+};

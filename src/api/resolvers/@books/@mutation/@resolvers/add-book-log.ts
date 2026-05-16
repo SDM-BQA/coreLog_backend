@@ -1,9 +1,9 @@
-import { get_auth_user } from "../../../../../utils/auth.utils";
+import { require_inner_circle_user } from "../../../../../utils/auth.utils";
 import { book_log_model } from "../../../../models/@books/book-log";
 
 export const add_book_log = async (_parent: any, args: any, ctx: any) => {
     try {
-        const user = await get_auth_user(ctx.req);
+        const user = await require_inner_circle_user(ctx.req);
         const { book_id, input } = args;
 
         const log = new book_log_model({

@@ -12,6 +12,12 @@ export const update_book = async (_parent: any, args: any, ctx: any) => {
         }
 
         Object.assign(book, input);
+
+        if (input.status === "want_to_read") {
+            book.started_from = undefined;
+            book.finished_on = undefined;
+        }
+
         await book.save();
 
         return {
