@@ -22,8 +22,6 @@ const book_log_schema = new Schema<BookLogSchemaDocument, BookLogSchemaModel>(
         note: text,
     },
     {
-        toJSON: { virtuals: true },
-        toObject: { virtuals: true },
         ...create_update_timestamps,
     }
 );

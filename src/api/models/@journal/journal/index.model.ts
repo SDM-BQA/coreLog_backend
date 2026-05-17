@@ -21,6 +21,10 @@ const journal_schema = new Schema<JournalSchemaDocument, JournalSchemaModel>(
         journal_type: { type: String, required: true, default: "personal" },
         mood: text,
         location: required_text,
+        location_address: text,
+        location_city: text,
+        location_lat: Number,
+        location_lng: Number,
         photos: text_arr,
         video: text,
         tags: text_arr,
@@ -30,8 +34,6 @@ const journal_schema = new Schema<JournalSchemaDocument, JournalSchemaModel>(
         user_id: { ...ref_id(models_constant.user), required: true },
     },
     {
-        toJSON: { virtuals: true },
-        toObject: { virtuals: true },
         ...create_update_timestamps,
     }
 );

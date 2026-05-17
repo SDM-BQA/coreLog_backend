@@ -48,3 +48,30 @@ export const test_user = async () => {
 
 }
 
+export const set_all_journal_addresses = async () => {
+    try {
+        const ADDRESS = "Kundalahalli Colony, Brookefield, Bengaluru";
+        const CITY = "Bengaluru";
+        const LAT = 12.9676;
+        const LNG = 77.7158;
+
+        const result = await journal_model.updateMany(
+            {},
+            {
+                $set: {
+                    location: CITY,
+                    location_address: ADDRESS,
+                    location_city: CITY,
+                    location_lat: LAT,
+                    location_lng: LNG,
+                },
+            }
+        );
+
+        console.log("✅ Journal address bulk update complete");
+        console.log(`Matched: ${result.matchedCount}, Updated: ${result.modifiedCount}`);
+    } catch (error) {
+        console.error("❌ Failed to bulk update journal addresses:", error);
+    }
+};
+
