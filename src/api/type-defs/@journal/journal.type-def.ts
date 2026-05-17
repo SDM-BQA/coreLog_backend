@@ -9,6 +9,10 @@ export const journal_type_defs = gql`
         journal_type: String!
         mood: String
         location: String!
+        location_address: String
+        location_city: String
+        location_lat: Float
+        location_lng: Float
         photos: [String!]!
         video: String
         tags: [String!]!
@@ -48,6 +52,10 @@ export const journal_type_defs = gql`
         journal_type: String!
         mood: String
         location: String!
+        location_address: String
+        location_city: String
+        location_lat: Float
+        location_lng: Float
         photos: [String!]
         video: String
         tags: [String!]
@@ -63,6 +71,10 @@ export const journal_type_defs = gql`
         journal_type: String
         mood: String
         location: String
+        location_address: String
+        location_city: String
+        location_lat: Float
+        location_lng: Float
         photos: [String!]
         video: String
         tags: [String!]
@@ -78,10 +90,20 @@ export const journal_type_defs = gql`
         tags: [String!]!
     }
 
+    type JournalStreak {
+        current_streak: Int!
+        longest_streak: Int!
+        total_active_days: Int!
+        active_days_this_month: Int!
+        last_entry_date: String
+        streak_updated_at: String
+    }
+
     extend type Query {
         get_my_journals(filter: JournalFilter): JournalResponse!
         get_journal(id: ID!): Journal
         get_journal_filters: JournalFilters!
+        get_journal_streak: JournalStreak!
     }
 
     extend type Mutation {

@@ -7,6 +7,10 @@ export interface JournalSchema {
     journal_type: string;
     mood?: string;
     location: string;
+    location_address?: string;
+    location_city?: string;
+    location_lat?: number;
+    location_lng?: number;
     photos?: string[];
     video?: string;
     tags?: string[];
