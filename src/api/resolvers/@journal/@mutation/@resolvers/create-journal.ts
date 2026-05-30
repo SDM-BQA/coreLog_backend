@@ -13,6 +13,27 @@ const normalize_tags = (tags: unknown): string[] => {
     );
 };
 
+const normalize_template_blocks = (blocks: unknown) => {
+    if (!Array.isArray(blocks)) return [];
+    return blocks
+        .map((block: any) => ({
+            id: String(block?.id ?? block?.type ?? "").trim(),
+            type: String(block?.type ?? "").trim(),
+            title: String(block?.title ?? "").trim(),
+            items: Array.isArray(block?.items)
+                ? block.items
+                    .map((item: any) => ({
+                        id: String(item?.id ?? "").trim(),
+                        amount: Number(item?.amount),
+                        note: String(item?.note ?? "").trim(),
+                        category: item?.category ? String(item.category).trim() : undefined,
+                    }))
+                    .filter((item: any) => item.id && Number.isFinite(item.amount) && item.amount > 0 && item.note)
+                : [],
+        }))
+        .filter((block: any) => block.id && block.type && block.title);
+};
+
 export const create_journal = async (_parent: any, args: { input: any }, ctx: any) => {
     try {
         const user = await get_auth_user(ctx.req);
@@ -21,6 +42,7 @@ export const create_journal = async (_parent: any, args: { input: any }, ctx: an
             ...args.input,
             photos: args.input.photos ?? [],
             tags: normalize_tags(args.input.tags),
+            template_blocks: normalize_template_blocks(args.input.template_blocks),
             is_favorite: args.input.is_favorite ?? false,
             user_id: user._id,
         });

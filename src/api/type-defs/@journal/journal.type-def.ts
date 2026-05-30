@@ -1,6 +1,34 @@
 import { gql } from "apollo-server-express";
 
 export const journal_type_defs = gql`
+    type JournalExpenseItem {
+        id: String!
+        amount: Float!
+        note: String!
+        category: String
+    }
+
+    type JournalTemplateBlock {
+        id: String!
+        type: String!
+        title: String!
+        items: [JournalExpenseItem!]!
+    }
+
+    input JournalExpenseItemInput {
+        id: String!
+        amount: Float!
+        note: String!
+        category: String
+    }
+
+    input JournalTemplateBlockInput {
+        id: String!
+        type: String!
+        title: String!
+        items: [JournalExpenseItemInput!]
+    }
+
     type Journal {
         _id: ID!
         title: String!
@@ -16,6 +44,7 @@ export const journal_type_defs = gql`
         photos: [String!]!
         video: String
         tags: [String!]!
+        template_blocks: [JournalTemplateBlock!]!
         date: String!
         time: String!
         is_favorite: Boolean!
@@ -59,6 +88,7 @@ export const journal_type_defs = gql`
         photos: [String!]
         video: String
         tags: [String!]
+        template_blocks: [JournalTemplateBlockInput!]
         date: String!
         time: String!
         is_favorite: Boolean
@@ -78,6 +108,7 @@ export const journal_type_defs = gql`
         photos: [String!]
         video: String
         tags: [String!]
+        template_blocks: [JournalTemplateBlockInput!]
         date: String
         time: String
         is_favorite: Boolean
