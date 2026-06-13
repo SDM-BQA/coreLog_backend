@@ -8,7 +8,9 @@ interface ModelType{
     poem: "Poem",
     target: "Target",
     journal: "Journal",
-    journal_streak: "JournalStreak"
+    journal_template: "JournalTemplate",
+    journal_streak: "JournalStreak",
+    screen_time: "ScreenTime"
 }
 
 export type ModelNames = ModelType[keyof ModelType];
@@ -24,5 +26,7 @@ export const models_constant: ModelType = {
     poem: "Poem",
     target: "Target",
     journal: "Journal",
-    journal_streak: "JournalStreak"
+    journal_template: "JournalTemplate",
+    journal_streak: "JournalStreak",
+    screen_time: "ScreenTime"
 }

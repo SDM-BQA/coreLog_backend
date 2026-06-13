@@ -15,6 +15,16 @@ export const journal_type_defs = gql`
         items: [JournalExpenseItem!]!
     }
 
+    type SavedJournalTemplate {
+        _id: ID!
+        name: String!
+        content: String!
+        category: String
+        user_id: ID!
+        created_at: String
+        updated_at: String
+    }
+
     input JournalExpenseItemInput {
         id: String!
         amount: Float!
@@ -27,6 +37,12 @@ export const journal_type_defs = gql`
         type: String!
         title: String!
         items: [JournalExpenseItemInput!]
+    }
+
+    input SavedJournalTemplateInput {
+        name: String!
+        content: String!
+        category: String
     }
 
     type Journal {
@@ -135,12 +151,16 @@ export const journal_type_defs = gql`
         get_journal(id: ID!): Journal
         get_journal_filters: JournalFilters!
         get_journal_streak: JournalStreak!
+        get_journal_templates: [SavedJournalTemplate!]!
     }
 
     extend type Mutation {
         create_journal(input: CreateJournalInput!): Journal!
         update_journal(id: ID!, input: UpdateJournalInput!): Journal!
         delete_journal(id: ID!): Boolean!
+        create_journal_template(input: SavedJournalTemplateInput!): SavedJournalTemplate!
+        update_journal_template(id: ID!, input: SavedJournalTemplateInput!): SavedJournalTemplate!
+        delete_journal_template(id: ID!): Boolean!
     }
 `;
 
