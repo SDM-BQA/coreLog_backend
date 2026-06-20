@@ -10,7 +10,10 @@ interface ModelType{
     journal: "Journal",
     journal_template: "JournalTemplate",
     journal_streak: "JournalStreak",
-    screen_time: "ScreenTime"
+    screen_time: "ScreenTime",
+    song: "Song",
+    album: "Album",
+    playlist: "Playlist"
 }
 
 export type ModelNames = ModelType[keyof ModelType];
@@ -28,5 +31,8 @@ export const models_constant: ModelType = {
     journal: "Journal",
     journal_template: "JournalTemplate",
     journal_streak: "JournalStreak",
-    screen_time: "ScreenTime"
+    screen_time: "ScreenTime",
+    song: "Song",
+    album: "Album",
+    playlist: "Playlist"
 }

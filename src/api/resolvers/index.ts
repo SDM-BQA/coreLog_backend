@@ -8,6 +8,7 @@ import { target_resolvers } from "./@target";
 import { journal_resolvers } from "./@journal";
 import { screen_time_resolvers } from "./@screen-time";
 import { test_resolver } from "./test/test.resolvers";
+import { music_resolvers } from "./@music";
 
-const resolvers = mergeResolvers([user_resolver, test_resolver, book_resolver, series_resolvers, movies_resolvers, poem_resolvers, target_resolvers, journal_resolvers, screen_time_resolvers]);
+const resolvers = mergeResolvers([user_resolver, test_resolver, book_resolver, series_resolvers, movies_resolvers, poem_resolvers, target_resolvers, journal_resolvers, screen_time_resolvers, music_resolvers]);
 export default resolvers;
