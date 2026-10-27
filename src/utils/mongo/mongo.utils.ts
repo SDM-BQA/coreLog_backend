@@ -98,6 +98,22 @@ export const ref_id = (ref: ModelNames) => ({
  */
 export const create_update_timestamps = {
     timestamps: { createdAt: "created_at", updatedAt: "updated_at" },
+    toJSON: { 
+        virtuals: true,
+        transform: (_doc: any, ret: any) => {
+            if (ret.created_at instanceof Date) ret.created_at = ret.created_at.toISOString();
+            if (ret.updated_at instanceof Date) ret.updated_at = ret.updated_at.toISOString();
+            return ret;
+        }
+    },
+    toObject: { 
+        virtuals: true,
+        transform: (_doc: any, ret: any) => {
+            if (ret.created_at instanceof Date) ret.created_at = ret.created_at.toISOString();
+            if (ret.updated_at instanceof Date) ret.updated_at = ret.updated_at.toISOString();
+            return ret;
+        }
+    }
 };
 
 export const create_timestamps = {

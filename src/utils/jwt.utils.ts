@@ -10,7 +10,7 @@ interface TokenPayload extends JwtPayload {
 
 export const sign_access_token = (payload: TokenPayload) => {
     return jwt.sign(payload, jwt_access_secret, {
-        expiresIn: "15m",
+        expiresIn: "2d",
     });
 };
 

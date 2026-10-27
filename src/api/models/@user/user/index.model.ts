@@ -6,6 +6,7 @@ import {
     required_text,
     text,
     unique_text,
+    ref_id,
 } from "../../../../utils/mongo";
 import { toTitleCase } from "../../../../utils/misc/case.utils";
 import { Encryption } from "../../../../utils/misc/encryption.utils";
@@ -26,10 +27,25 @@ const user_schema = new Schema<UserSchemaDocument, UserSchemaModel>(
         gender: text,
         otp_code: String,
         otp_expires_at: Date,
+        plan: {
+            type: String,
+            enum: ["free", "inner_circle"],
+            default: "free",
+        },
+        inner_circle_email: text,
+        inner_circle_otp_code: String,
+        inner_circle_otp_expires_at: Date,
+        inner_circle_started_at: Date,
+        inner_circle_expires_at: Date,
+        library: {
+            books: [ref_id(models_constant.book)],
+            movies: [ref_id(models_constant.movie)],
+            series: [ref_id(models_constant.series)],
+            book_logs: [ref_id(models_constant.book_log)],
+            series_logs: [ref_id(models_constant.series_log)],
+        },
     },
     {
-        toJSON: { virtuals: true },
-        toObject: { virtuals: true },
         ...create_update_timestamps,
     },
 
