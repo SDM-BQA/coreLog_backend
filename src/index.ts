@@ -68,12 +68,12 @@ async function bootstrap() {
 }
 
 console.log("connecting to DB...");
-connect_db().then(async () => {
-    try {
+connect_db()
+    .then(async () => {
         await bootstrap()
         playground()
-    } catch (err) {
-        console.log(err);
-
-    }
-})
+    })
+    .catch((err) => {
+        console.error("Failed to connect to MongoDB, server not started:", err);
+        process.exit(1);
+    })
