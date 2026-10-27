@@ -13,12 +13,36 @@ const normalize_tags = (tags: unknown): string[] => {
     );
 };
 
+const normalize_template_blocks = (blocks: unknown) => {
+    if (!Array.isArray(blocks)) return [];
+    return blocks
+        .map((block: any) => ({
+            id: String(block?.id ?? block?.type ?? "").trim(),
+            type: String(block?.type ?? "").trim(),
+            title: String(block?.title ?? "").trim(),
+            items: Array.isArray(block?.items)
+                ? block.items
+                    .map((item: any) => ({
+                        id: String(item?.id ?? "").trim(),
+                        amount: Number(item?.amount),
+                        note: String(item?.note ?? "").trim(),
+                        category: item?.category ? String(item.category).trim() : undefined,
+                    }))
+                    .filter((item: any) => item.id && Number.isFinite(item.amount) && item.amount > 0 && item.note)
+                : [],
+        }))
+        .filter((block: any) => block.id && block.type && block.title);
+};
+
 export const update_journal = async (_parent: any, args: { id: string; input: any }, ctx: any) => {
     try {
         const user = await get_auth_user(ctx.req);
         const update_payload = { ...args.input };
         if ("tags" in update_payload) {
             update_payload.tags = normalize_tags(update_payload.tags);
+        }
+        if ("template_blocks" in update_payload) {
+            update_payload.template_blocks = normalize_template_blocks(update_payload.template_blocks);
         }
 
         const journal = await journal_model.findOneAndUpdate(

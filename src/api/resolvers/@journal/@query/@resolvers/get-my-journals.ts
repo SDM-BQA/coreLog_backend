@@ -22,8 +22,8 @@ export const get_my_journals = async (_parent: any, args: { filter?: JournalFilt
         const base_query: Record<string, any> = { user_id: user._id };
         if (f.date_from || f.date_to) {
             base_query.date = {};
-            if (f.date_from) base_query.date.$gte = f.date_from;
-            if (f.date_to) base_query.date.$lte = f.date_to;
+            if (f.date_from) base_query.date.$gte = new Date(f.date_from + "T00:00:00.000Z");
+            if (f.date_to)   base_query.date.$lte = new Date(f.date_to   + "T23:59:59.999Z");
         }
 
         const result = await quick_list(journal_model, {

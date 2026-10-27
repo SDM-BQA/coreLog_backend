@@ -13,6 +13,26 @@ import {
 interface JournalSchemaDocument extends JournalSchema, Document {}
 interface JournalSchemaModel extends Model<JournalSchemaDocument> {}
 
+const expense_item_schema = new Schema(
+    {
+        id: { type: String, required: true },
+        amount: { type: Number, required: true },
+        note: { type: String, required: true },
+        category: text,
+    },
+    { _id: false }
+);
+
+const template_block_schema = new Schema(
+    {
+        id: { type: String, required: true },
+        type: { type: String, required: true },
+        title: { type: String, required: true },
+        items: { type: [expense_item_schema], default: [] },
+    },
+    { _id: false }
+);
+
 const journal_schema = new Schema<JournalSchemaDocument, JournalSchemaModel>(
     {
         title: required_text,
@@ -28,6 +48,7 @@ const journal_schema = new Schema<JournalSchemaDocument, JournalSchemaModel>(
         photos: text_arr,
         video: text,
         tags: text_arr,
+        template_blocks: { type: [template_block_schema], default: [] },
         date: required_text,
         time: required_text,
         is_favorite: { ...false_bool, required: true },

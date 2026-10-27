@@ -65,6 +65,26 @@ export type BookFilters = {
   statuses: Array<Scalars['String']['output']>;
 };
 
+export type BookLog = {
+  __typename?: 'BookLog';
+  _id: Scalars['ID']['output'];
+  book_id: Scalars['ID']['output'];
+  created_at?: Maybe<Scalars['String']['output']>;
+  current_page: Scalars['Int']['output'];
+  date: Scalars['String']['output'];
+  note?: Maybe<Scalars['String']['output']>;
+  pages_read: Scalars['Int']['output'];
+  updated_at?: Maybe<Scalars['String']['output']>;
+  user_id: Scalars['ID']['output'];
+};
+
+export type BookLogInput = {
+  current_page: Scalars['Int']['input'];
+  date: Scalars['String']['input'];
+  note?: InputMaybe<Scalars['String']['input']>;
+  pages_read: Scalars['Int']['input'];
+};
+
 export type BookPage = {
   __typename?: 'BookPage';
   books: Array<Maybe<Book>>;
@@ -101,6 +121,26 @@ export type CreateBookInput = {
   started_from?: InputMaybe<Scalars['String']['input']>;
   status: Scalars['String']['input'];
   title: Scalars['String']['input'];
+};
+
+export type CreateJournalInput = {
+  content: Scalars['String']['input'];
+  date: Scalars['String']['input'];
+  description?: InputMaybe<Scalars['String']['input']>;
+  is_favorite?: InputMaybe<Scalars['Boolean']['input']>;
+  journal_type: Scalars['String']['input'];
+  location: Scalars['String']['input'];
+  location_address?: InputMaybe<Scalars['String']['input']>;
+  location_city?: InputMaybe<Scalars['String']['input']>;
+  location_lat?: InputMaybe<Scalars['Float']['input']>;
+  location_lng?: InputMaybe<Scalars['Float']['input']>;
+  mood?: InputMaybe<Scalars['String']['input']>;
+  photos?: InputMaybe<Array<Scalars['String']['input']>>;
+  tags?: InputMaybe<Array<Scalars['String']['input']>>;
+  template_blocks?: InputMaybe<Array<JournalTemplateBlockInput>>;
+  time: Scalars['String']['input'];
+  title: Scalars['String']['input'];
+  video?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type CreateMovieInput = {
@@ -156,6 +196,7 @@ export type CreateSeriesInput = {
   release_year: Scalars['String']['input'];
   review?: InputMaybe<Scalars['String']['input']>;
   seasons: Scalars['Int']['input'];
+  seasons_watched?: InputMaybe<Scalars['Int']['input']>;
   started_from?: InputMaybe<Scalars['String']['input']>;
   status: Scalars['String']['input'];
   title: Scalars['String']['input'];
@@ -190,11 +231,119 @@ export type Dog = {
   owner?: Maybe<Owner>;
 };
 
+export type InnerCircleStatus = {
+  __typename?: 'InnerCircleStatus';
+  days_left: Scalars['Int']['output'];
+  email?: Maybe<Scalars['String']['output']>;
+  expires_at?: Maybe<Scalars['String']['output']>;
+  is_active: Scalars['Boolean']['output'];
+  plan: Scalars['String']['output'];
+  renewal_cycle: Scalars['String']['output'];
+  started_at?: Maybe<Scalars['String']['output']>;
+};
+
+export type Journal = {
+  __typename?: 'Journal';
+  _id: Scalars['ID']['output'];
+  content: Scalars['String']['output'];
+  created_at?: Maybe<Scalars['String']['output']>;
+  date: Scalars['String']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  is_favorite: Scalars['Boolean']['output'];
+  journal_type: Scalars['String']['output'];
+  location: Scalars['String']['output'];
+  location_address?: Maybe<Scalars['String']['output']>;
+  location_city?: Maybe<Scalars['String']['output']>;
+  location_lat?: Maybe<Scalars['Float']['output']>;
+  location_lng?: Maybe<Scalars['Float']['output']>;
+  mood?: Maybe<Scalars['String']['output']>;
+  photos: Array<Scalars['String']['output']>;
+  tags: Array<Scalars['String']['output']>;
+  template_blocks: Array<JournalTemplateBlock>;
+  time: Scalars['String']['output'];
+  title: Scalars['String']['output'];
+  updated_at?: Maybe<Scalars['String']['output']>;
+  user_id: Scalars['ID']['output'];
+  video?: Maybe<Scalars['String']['output']>;
+};
+
+export type JournalExpenseItem = {
+  __typename?: 'JournalExpenseItem';
+  amount: Scalars['Float']['output'];
+  category?: Maybe<Scalars['String']['output']>;
+  id: Scalars['String']['output'];
+  note: Scalars['String']['output'];
+};
+
+export type JournalExpenseItemInput = {
+  amount: Scalars['Float']['input'];
+  category?: InputMaybe<Scalars['String']['input']>;
+  id: Scalars['String']['input'];
+  note: Scalars['String']['input'];
+};
+
+export type JournalFilter = {
+  date_from?: InputMaybe<Scalars['String']['input']>;
+  date_to?: InputMaybe<Scalars['String']['input']>;
+  is_favorite?: InputMaybe<Scalars['Boolean']['input']>;
+  journal_type?: InputMaybe<Scalars['String']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  mood?: InputMaybe<Scalars['String']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  tags?: InputMaybe<Array<Scalars['String']['input']>>;
+};
+
+export type JournalFilters = {
+  __typename?: 'JournalFilters';
+  journal_types: Array<Scalars['String']['output']>;
+  locations: Array<Scalars['String']['output']>;
+  moods: Array<Scalars['String']['output']>;
+  tags: Array<Scalars['String']['output']>;
+};
+
+export type JournalResponse = {
+  __typename?: 'JournalResponse';
+  current_page: Scalars['Int']['output'];
+  has_next_page: Scalars['Boolean']['output'];
+  journals: Array<Journal>;
+  page_count: Scalars['Int']['output'];
+  per_page: Scalars['Int']['output'];
+  total_count: Scalars['Int']['output'];
+};
+
+export type JournalStreak = {
+  __typename?: 'JournalStreak';
+  active_days_this_month: Scalars['Int']['output'];
+  current_streak: Scalars['Int']['output'];
+  last_entry_date?: Maybe<Scalars['String']['output']>;
+  longest_streak: Scalars['Int']['output'];
+  streak_updated_at?: Maybe<Scalars['String']['output']>;
+  total_active_days: Scalars['Int']['output'];
+};
+
+export type JournalTemplateBlock = {
+  __typename?: 'JournalTemplateBlock';
+  id: Scalars['String']['output'];
+  items: Array<JournalExpenseItem>;
+  title: Scalars['String']['output'];
+  type: Scalars['String']['output'];
+};
+
+export type JournalTemplateBlockInput = {
+  id: Scalars['String']['input'];
+  items?: InputMaybe<Array<JournalExpenseItemInput>>;
+  title: Scalars['String']['input'];
+  type: Scalars['String']['input'];
+};
+
 export type Library = {
   __typename?: 'Library';
+  book_logs?: Maybe<Array<Maybe<Scalars['ID']['output']>>>;
   books?: Maybe<Array<Maybe<Book>>>;
   movies?: Maybe<Array<Maybe<Scalars['ID']['output']>>>;
   series?: Maybe<Array<Maybe<Scalars['ID']['output']>>>;
+  series_logs?: Maybe<Array<Maybe<Scalars['ID']['output']>>>;
 };
 
 export type Movie = {
@@ -262,33 +411,67 @@ export type MovieResponse = {
 export type Mutation = {
   __typename?: 'Mutation';
   _?: Maybe<Scalars['String']['output']>;
+  add_book_log: BookLog;
+  add_series_log: SeriesLog;
+  cancel_inner_circle_membership: InnerCircleStatus;
   create_book?: Maybe<Book>;
+  create_journal: Journal;
   create_movie: Movie;
   create_poem: Poem;
   create_series: Series;
   create_user_account?: Maybe<AuthResponse>;
   delete_book?: Maybe<Scalars['Boolean']['output']>;
+  delete_book_log?: Maybe<Scalars['Boolean']['output']>;
+  delete_journal: Scalars['Boolean']['output'];
   delete_movie: Scalars['Boolean']['output'];
   delete_poem: Scalars['Boolean']['output'];
   delete_series: Scalars['Boolean']['output'];
+  delete_series_log: Scalars['Boolean']['output'];
   delete_target: Scalars['Boolean']['output'];
   delete_user_account?: Maybe<Scalars['Boolean']['output']>;
   login_user_account?: Maybe<AuthResponse>;
+  send_inner_circle_otp: Scalars['Boolean']['output'];
+  send_journal_pin_reset_otp?: Maybe<Scalars['Boolean']['output']>;
   send_otp?: Maybe<Scalars['Boolean']['output']>;
   set_target: Target;
   updateCatBreed?: Maybe<Cat>;
   updateDogBreed?: Maybe<Dog>;
   update_book?: Maybe<Book>;
+  update_journal: Journal;
   update_movie: Movie;
   update_poem: Poem;
   update_series: Series;
   update_user_account?: Maybe<User>;
+  verify_inner_circle_otp: InnerCircleStatus;
   verify_otp?: Maybe<Scalars['Boolean']['output']>;
+};
+
+
+export type MutationAdd_Book_LogArgs = {
+  book_id: Scalars['ID']['input'];
+  input: BookLogInput;
+};
+
+
+export type MutationAdd_Series_LogArgs = {
+  input: SeriesLogInput;
+  series_id: Scalars['ID']['input'];
+};
+
+
+export type MutationCancel_Inner_Circle_MembershipArgs = {
+  email: Scalars['String']['input'];
+  otp: Scalars['String']['input'];
 };
 
 
 export type MutationCreate_BookArgs = {
   input: CreateBookInput;
+};
+
+
+export type MutationCreate_JournalArgs = {
+  input: CreateJournalInput;
 };
 
 
@@ -317,6 +500,16 @@ export type MutationDelete_BookArgs = {
 };
 
 
+export type MutationDelete_Book_LogArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type MutationDelete_JournalArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
 export type MutationDelete_MovieArgs = {
   id: Scalars['ID']['input'];
 };
@@ -328,6 +521,11 @@ export type MutationDelete_PoemArgs = {
 
 
 export type MutationDelete_SeriesArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type MutationDelete_Series_LogArgs = {
   id: Scalars['ID']['input'];
 };
 
@@ -345,6 +543,16 @@ export type MutationDelete_User_AccountArgs = {
 export type MutationLogin_User_AccountArgs = {
   email_id: Scalars['String']['input'];
   password: Scalars['String']['input'];
+};
+
+
+export type MutationSend_Inner_Circle_OtpArgs = {
+  email: Scalars['String']['input'];
+};
+
+
+export type MutationSend_Journal_Pin_Reset_OtpArgs = {
+  email: Scalars['String']['input'];
 };
 
 
@@ -374,6 +582,12 @@ export type MutationUpdate_BookArgs = {
 };
 
 
+export type MutationUpdate_JournalArgs = {
+  id: Scalars['ID']['input'];
+  input: UpdateJournalInput;
+};
+
+
 export type MutationUpdate_MovieArgs = {
   id: Scalars['ID']['input'];
   input: UpdateMovieInput;
@@ -395,6 +609,12 @@ export type MutationUpdate_SeriesArgs = {
 export type MutationUpdate_User_AccountArgs = {
   id: Scalars['ID']['input'];
   input: UpdateUserInput;
+};
+
+
+export type MutationVerify_Inner_Circle_OtpArgs = {
+  email: Scalars['String']['input'];
+  otp: Scalars['String']['input'];
 };
 
 
@@ -460,10 +680,16 @@ export type Query = {
   get_all_user_accounts?: Maybe<Array<Maybe<User>>>;
   get_book?: Maybe<Book>;
   get_book_filters: BookFilters;
+  get_book_logs: Array<BookLog>;
   get_dashboard_stats: DashboardStats;
+  get_inner_circle_status: InnerCircleStatus;
+  get_journal?: Maybe<Journal>;
+  get_journal_filters: JournalFilters;
+  get_journal_streak: JournalStreak;
   get_movie?: Maybe<Movie>;
   get_movie_filters: MovieFilters;
   get_my_books: BookPage;
+  get_my_journals: JournalResponse;
   get_my_movies: MovieResponse;
   get_my_poems: PoemResponse;
   get_my_series: SeriesResponse;
@@ -471,6 +697,7 @@ export type Query = {
   get_poem?: Maybe<Poem>;
   get_series?: Maybe<Series>;
   get_series_filters: SeriesFilters;
+  get_series_logs: Array<SeriesLog>;
   get_target_progress: TargetProgress;
   get_user_account?: Maybe<User>;
   get_user_books?: Maybe<Array<Maybe<Book>>>;
@@ -502,6 +729,16 @@ export type QueryGet_BookArgs = {
 };
 
 
+export type QueryGet_Book_LogsArgs = {
+  book_id: Scalars['ID']['input'];
+};
+
+
+export type QueryGet_JournalArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
 export type QueryGet_MovieArgs = {
   id: Scalars['ID']['input'];
 };
@@ -509,6 +746,11 @@ export type QueryGet_MovieArgs = {
 
 export type QueryGet_My_BooksArgs = {
   filter?: InputMaybe<BookFilterInput>;
+};
+
+
+export type QueryGet_My_JournalsArgs = {
+  filter?: InputMaybe<JournalFilter>;
 };
 
 
@@ -539,6 +781,11 @@ export type QueryGet_PoemArgs = {
 
 export type QueryGet_SeriesArgs = {
   id: Scalars['ID']['input'];
+};
+
+
+export type QueryGet_Series_LogsArgs = {
+  series_id: Scalars['ID']['input'];
 };
 
 
@@ -573,6 +820,7 @@ export type Series = {
   release_year: Scalars['String']['output'];
   review?: Maybe<Scalars['String']['output']>;
   seasons: Scalars['Int']['output'];
+  seasons_watched?: Maybe<Scalars['Int']['output']>;
   started_from?: Maybe<Scalars['String']['output']>;
   status: Scalars['String']['output'];
   title: Scalars['String']['output'];
@@ -597,6 +845,26 @@ export type SeriesFilters = {
   genres: Array<Scalars['String']['output']>;
   platforms: Array<Scalars['String']['output']>;
   statuses: Array<Scalars['String']['output']>;
+};
+
+export type SeriesLog = {
+  __typename?: 'SeriesLog';
+  _id: Scalars['ID']['output'];
+  created_at?: Maybe<Scalars['String']['output']>;
+  current_episode: Scalars['Int']['output'];
+  date: Scalars['String']['output'];
+  episodes_watched: Scalars['Int']['output'];
+  note?: Maybe<Scalars['String']['output']>;
+  series_id: Scalars['ID']['output'];
+  updated_at?: Maybe<Scalars['String']['output']>;
+  user_id: Scalars['ID']['output'];
+};
+
+export type SeriesLogInput = {
+  current_episode: Scalars['Int']['input'];
+  date: Scalars['String']['input'];
+  episodes_watched: Scalars['Int']['input'];
+  note?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type SeriesResponse = {
@@ -667,6 +935,26 @@ export type UpdateDogBreedInput = {
   breed: Scalars['String']['input'];
 };
 
+export type UpdateJournalInput = {
+  content?: InputMaybe<Scalars['String']['input']>;
+  date?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  is_favorite?: InputMaybe<Scalars['Boolean']['input']>;
+  journal_type?: InputMaybe<Scalars['String']['input']>;
+  location?: InputMaybe<Scalars['String']['input']>;
+  location_address?: InputMaybe<Scalars['String']['input']>;
+  location_city?: InputMaybe<Scalars['String']['input']>;
+  location_lat?: InputMaybe<Scalars['Float']['input']>;
+  location_lng?: InputMaybe<Scalars['Float']['input']>;
+  mood?: InputMaybe<Scalars['String']['input']>;
+  photos?: InputMaybe<Array<Scalars['String']['input']>>;
+  tags?: InputMaybe<Array<Scalars['String']['input']>>;
+  template_blocks?: InputMaybe<Array<JournalTemplateBlockInput>>;
+  time?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  video?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type UpdateMovieInput = {
   adult?: InputMaybe<Scalars['Boolean']['input']>;
   backdrop_path?: InputMaybe<Scalars['String']['input']>;
@@ -720,6 +1008,7 @@ export type UpdateSeriesInput = {
   release_year?: InputMaybe<Scalars['String']['input']>;
   review?: InputMaybe<Scalars['String']['input']>;
   seasons?: InputMaybe<Scalars['Int']['input']>;
+  seasons_watched?: InputMaybe<Scalars['Int']['input']>;
   started_from?: InputMaybe<Scalars['String']['input']>;
   status?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
@@ -741,9 +1030,13 @@ export type User = {
   email_id: Scalars['String']['output'];
   first_name: Scalars['String']['output'];
   gender?: Maybe<Scalars['String']['output']>;
+  inner_circle_email?: Maybe<Scalars['String']['output']>;
+  inner_circle_expires_at?: Maybe<Scalars['String']['output']>;
+  inner_circle_started_at?: Maybe<Scalars['String']['output']>;
   last_name: Scalars['String']['output'];
   library?: Maybe<Library>;
   mobile_no?: Maybe<Scalars['String']['output']>;
+  plan?: Maybe<Scalars['String']['output']>;
   profile_pic?: Maybe<Scalars['String']['output']>;
   user_name?: Maybe<Scalars['String']['output']>;
 };
@@ -825,10 +1118,13 @@ export type ResolversTypes = {
   Book: ResolverTypeWrapper<Book>;
   BookFilterInput: BookFilterInput;
   BookFilters: ResolverTypeWrapper<BookFilters>;
+  BookLog: ResolverTypeWrapper<BookLog>;
+  BookLogInput: BookLogInput;
   BookPage: ResolverTypeWrapper<BookPage>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
   Cat: ResolverTypeWrapper<Cat>;
   CreateBookInput: CreateBookInput;
+  CreateJournalInput: CreateJournalInput;
   CreateMovieInput: CreateMovieInput;
   CreatePoemInput: CreatePoemInput;
   CreateSeriesInput: CreateSeriesInput;
@@ -837,7 +1133,17 @@ export type ResolversTypes = {
   Dog: ResolverTypeWrapper<Dog>;
   Float: ResolverTypeWrapper<Scalars['Float']['output']>;
   ID: ResolverTypeWrapper<Scalars['ID']['output']>;
+  InnerCircleStatus: ResolverTypeWrapper<InnerCircleStatus>;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
+  Journal: ResolverTypeWrapper<Journal>;
+  JournalExpenseItem: ResolverTypeWrapper<JournalExpenseItem>;
+  JournalExpenseItemInput: JournalExpenseItemInput;
+  JournalFilter: JournalFilter;
+  JournalFilters: ResolverTypeWrapper<JournalFilters>;
+  JournalResponse: ResolverTypeWrapper<JournalResponse>;
+  JournalStreak: ResolverTypeWrapper<JournalStreak>;
+  JournalTemplateBlock: ResolverTypeWrapper<JournalTemplateBlock>;
+  JournalTemplateBlockInput: JournalTemplateBlockInput;
   Library: ResolverTypeWrapper<Library>;
   Movie: ResolverTypeWrapper<Movie>;
   MovieFilter: MovieFilter;
@@ -853,6 +1159,8 @@ export type ResolversTypes = {
   Series: ResolverTypeWrapper<Series>;
   SeriesFilter: SeriesFilter;
   SeriesFilters: ResolverTypeWrapper<SeriesFilters>;
+  SeriesLog: ResolverTypeWrapper<SeriesLog>;
+  SeriesLogInput: SeriesLogInput;
   SeriesResponse: ResolverTypeWrapper<SeriesResponse>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
   Target: ResolverTypeWrapper<Target>;
@@ -861,6 +1169,7 @@ export type ResolversTypes = {
   UpdateBookInput: UpdateBookInput;
   UpdateCatBreedInput: UpdateCatBreedInput;
   UpdateDogBreedInput: UpdateDogBreedInput;
+  UpdateJournalInput: UpdateJournalInput;
   UpdateMovieInput: UpdateMovieInput;
   UpdatePoemInput: UpdatePoemInput;
   UpdateSeriesInput: UpdateSeriesInput;
@@ -874,10 +1183,13 @@ export type ResolversParentTypes = {
   Book: Book;
   BookFilterInput: BookFilterInput;
   BookFilters: BookFilters;
+  BookLog: BookLog;
+  BookLogInput: BookLogInput;
   BookPage: BookPage;
   Boolean: Scalars['Boolean']['output'];
   Cat: Cat;
   CreateBookInput: CreateBookInput;
+  CreateJournalInput: CreateJournalInput;
   CreateMovieInput: CreateMovieInput;
   CreatePoemInput: CreatePoemInput;
   CreateSeriesInput: CreateSeriesInput;
@@ -886,7 +1198,17 @@ export type ResolversParentTypes = {
   Dog: Dog;
   Float: Scalars['Float']['output'];
   ID: Scalars['ID']['output'];
+  InnerCircleStatus: InnerCircleStatus;
   Int: Scalars['Int']['output'];
+  Journal: Journal;
+  JournalExpenseItem: JournalExpenseItem;
+  JournalExpenseItemInput: JournalExpenseItemInput;
+  JournalFilter: JournalFilter;
+  JournalFilters: JournalFilters;
+  JournalResponse: JournalResponse;
+  JournalStreak: JournalStreak;
+  JournalTemplateBlock: JournalTemplateBlock;
+  JournalTemplateBlockInput: JournalTemplateBlockInput;
   Library: Library;
   Movie: Movie;
   MovieFilter: MovieFilter;
@@ -902,6 +1224,8 @@ export type ResolversParentTypes = {
   Series: Series;
   SeriesFilter: SeriesFilter;
   SeriesFilters: SeriesFilters;
+  SeriesLog: SeriesLog;
+  SeriesLogInput: SeriesLogInput;
   SeriesResponse: SeriesResponse;
   String: Scalars['String']['output'];
   Target: Target;
@@ -910,6 +1234,7 @@ export type ResolversParentTypes = {
   UpdateBookInput: UpdateBookInput;
   UpdateCatBreedInput: UpdateCatBreedInput;
   UpdateDogBreedInput: UpdateDogBreedInput;
+  UpdateJournalInput: UpdateJournalInput;
   UpdateMovieInput: UpdateMovieInput;
   UpdatePoemInput: UpdatePoemInput;
   UpdateSeriesInput: UpdateSeriesInput;
@@ -952,6 +1277,18 @@ export type BookFiltersResolvers<ContextType = any, ParentType extends Resolvers
   statuses?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
 };
 
+export type BookLogResolvers<ContextType = any, ParentType extends ResolversParentTypes['BookLog'] = ResolversParentTypes['BookLog']> = {
+  _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  book_id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  created_at?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  current_page?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  date?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  note?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  pages_read?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  updated_at?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  user_id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+};
+
 export type BookPageResolvers<ContextType = any, ParentType extends ResolversParentTypes['BookPage'] = ResolversParentTypes['BookPage']> = {
   books?: Resolver<Array<Maybe<ResolversTypes['Book']>>, ParentType, ContextType>;
   current_page?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
@@ -985,10 +1322,85 @@ export type DogResolvers<ContextType = any, ParentType extends ResolversParentTy
   owner?: Resolver<Maybe<ResolversTypes['Owner']>, ParentType, ContextType>;
 };
 
+export type InnerCircleStatusResolvers<ContextType = any, ParentType extends ResolversParentTypes['InnerCircleStatus'] = ResolversParentTypes['InnerCircleStatus']> = {
+  days_left?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  expires_at?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  is_active?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  plan?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  renewal_cycle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  started_at?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+};
+
+export type JournalResolvers<ContextType = any, ParentType extends ResolversParentTypes['Journal'] = ResolversParentTypes['Journal']> = {
+  _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  content?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  created_at?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  date?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  is_favorite?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  journal_type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  location?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  location_address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  location_city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  location_lat?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  location_lng?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  mood?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  photos?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  tags?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  template_blocks?: Resolver<Array<ResolversTypes['JournalTemplateBlock']>, ParentType, ContextType>;
+  time?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  updated_at?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  user_id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  video?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+};
+
+export type JournalExpenseItemResolvers<ContextType = any, ParentType extends ResolversParentTypes['JournalExpenseItem'] = ResolversParentTypes['JournalExpenseItem']> = {
+  amount?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  category?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  note?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+};
+
+export type JournalFiltersResolvers<ContextType = any, ParentType extends ResolversParentTypes['JournalFilters'] = ResolversParentTypes['JournalFilters']> = {
+  journal_types?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  locations?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  moods?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  tags?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+};
+
+export type JournalResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['JournalResponse'] = ResolversParentTypes['JournalResponse']> = {
+  current_page?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  has_next_page?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  journals?: Resolver<Array<ResolversTypes['Journal']>, ParentType, ContextType>;
+  page_count?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  per_page?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  total_count?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+};
+
+export type JournalStreakResolvers<ContextType = any, ParentType extends ResolversParentTypes['JournalStreak'] = ResolversParentTypes['JournalStreak']> = {
+  active_days_this_month?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  current_streak?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  last_entry_date?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  longest_streak?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  streak_updated_at?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  total_active_days?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+};
+
+export type JournalTemplateBlockResolvers<ContextType = any, ParentType extends ResolversParentTypes['JournalTemplateBlock'] = ResolversParentTypes['JournalTemplateBlock']> = {
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  items?: Resolver<Array<ResolversTypes['JournalExpenseItem']>, ParentType, ContextType>;
+  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+};
+
 export type LibraryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Library'] = ResolversParentTypes['Library']> = {
+  book_logs?: Resolver<Maybe<Array<Maybe<ResolversTypes['ID']>>>, ParentType, ContextType>;
   books?: Resolver<Maybe<Array<Maybe<ResolversTypes['Book']>>>, ParentType, ContextType>;
   movies?: Resolver<Maybe<Array<Maybe<ResolversTypes['ID']>>>, ParentType, ContextType>;
   series?: Resolver<Maybe<Array<Maybe<ResolversTypes['ID']>>>, ParentType, ContextType>;
+  series_logs?: Resolver<Maybe<Array<Maybe<ResolversTypes['ID']>>>, ParentType, ContextType>;
 };
 
 export type MovieResolvers<ContextType = any, ParentType extends ResolversParentTypes['Movie'] = ResolversParentTypes['Movie']> = {
@@ -1040,27 +1452,38 @@ export type MovieResponseResolvers<ContextType = any, ParentType extends Resolve
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   _?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  add_book_log?: Resolver<ResolversTypes['BookLog'], ParentType, ContextType, RequireFields<MutationAdd_Book_LogArgs, 'book_id' | 'input'>>;
+  add_series_log?: Resolver<ResolversTypes['SeriesLog'], ParentType, ContextType, RequireFields<MutationAdd_Series_LogArgs, 'input' | 'series_id'>>;
+  cancel_inner_circle_membership?: Resolver<ResolversTypes['InnerCircleStatus'], ParentType, ContextType, RequireFields<MutationCancel_Inner_Circle_MembershipArgs, 'email' | 'otp'>>;
   create_book?: Resolver<Maybe<ResolversTypes['Book']>, ParentType, ContextType, RequireFields<MutationCreate_BookArgs, 'input'>>;
+  create_journal?: Resolver<ResolversTypes['Journal'], ParentType, ContextType, RequireFields<MutationCreate_JournalArgs, 'input'>>;
   create_movie?: Resolver<ResolversTypes['Movie'], ParentType, ContextType, RequireFields<MutationCreate_MovieArgs, 'input'>>;
   create_poem?: Resolver<ResolversTypes['Poem'], ParentType, ContextType, RequireFields<MutationCreate_PoemArgs, 'input'>>;
   create_series?: Resolver<ResolversTypes['Series'], ParentType, ContextType, RequireFields<MutationCreate_SeriesArgs, 'input'>>;
   create_user_account?: Resolver<Maybe<ResolversTypes['AuthResponse']>, ParentType, ContextType, RequireFields<MutationCreate_User_AccountArgs, 'input'>>;
   delete_book?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationDelete_BookArgs, 'id'>>;
+  delete_book_log?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationDelete_Book_LogArgs, 'id'>>;
+  delete_journal?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDelete_JournalArgs, 'id'>>;
   delete_movie?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDelete_MovieArgs, 'id'>>;
   delete_poem?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDelete_PoemArgs, 'id'>>;
   delete_series?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDelete_SeriesArgs, 'id'>>;
+  delete_series_log?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDelete_Series_LogArgs, 'id'>>;
   delete_target?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDelete_TargetArgs, 'id'>>;
   delete_user_account?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationDelete_User_AccountArgs, 'id'>>;
   login_user_account?: Resolver<Maybe<ResolversTypes['AuthResponse']>, ParentType, ContextType, RequireFields<MutationLogin_User_AccountArgs, 'email_id' | 'password'>>;
+  send_inner_circle_otp?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationSend_Inner_Circle_OtpArgs, 'email'>>;
+  send_journal_pin_reset_otp?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationSend_Journal_Pin_Reset_OtpArgs, 'email'>>;
   send_otp?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationSend_OtpArgs, 'email'>>;
   set_target?: Resolver<ResolversTypes['Target'], ParentType, ContextType, RequireFields<MutationSet_TargetArgs, 'input'>>;
   updateCatBreed?: Resolver<Maybe<ResolversTypes['Cat']>, ParentType, ContextType, RequireFields<MutationUpdateCatBreedArgs, 'input'>>;
   updateDogBreed?: Resolver<Maybe<ResolversTypes['Dog']>, ParentType, ContextType, RequireFields<MutationUpdateDogBreedArgs, 'input'>>;
   update_book?: Resolver<Maybe<ResolversTypes['Book']>, ParentType, ContextType, RequireFields<MutationUpdate_BookArgs, 'id' | 'input'>>;
+  update_journal?: Resolver<ResolversTypes['Journal'], ParentType, ContextType, RequireFields<MutationUpdate_JournalArgs, 'id' | 'input'>>;
   update_movie?: Resolver<ResolversTypes['Movie'], ParentType, ContextType, RequireFields<MutationUpdate_MovieArgs, 'id' | 'input'>>;
   update_poem?: Resolver<ResolversTypes['Poem'], ParentType, ContextType, RequireFields<MutationUpdate_PoemArgs, 'id' | 'input'>>;
   update_series?: Resolver<ResolversTypes['Series'], ParentType, ContextType, RequireFields<MutationUpdate_SeriesArgs, 'id' | 'input'>>;
   update_user_account?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationUpdate_User_AccountArgs, 'id' | 'input'>>;
+  verify_inner_circle_otp?: Resolver<ResolversTypes['InnerCircleStatus'], ParentType, ContextType, RequireFields<MutationVerify_Inner_Circle_OtpArgs, 'email' | 'otp'>>;
   verify_otp?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationVerify_OtpArgs, 'email' | 'otp'>>;
 };
 
@@ -1111,10 +1534,16 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   get_all_user_accounts?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;
   get_book?: Resolver<Maybe<ResolversTypes['Book']>, ParentType, ContextType, RequireFields<QueryGet_BookArgs, 'id'>>;
   get_book_filters?: Resolver<ResolversTypes['BookFilters'], ParentType, ContextType>;
+  get_book_logs?: Resolver<Array<ResolversTypes['BookLog']>, ParentType, ContextType, RequireFields<QueryGet_Book_LogsArgs, 'book_id'>>;
   get_dashboard_stats?: Resolver<ResolversTypes['DashboardStats'], ParentType, ContextType>;
+  get_inner_circle_status?: Resolver<ResolversTypes['InnerCircleStatus'], ParentType, ContextType>;
+  get_journal?: Resolver<Maybe<ResolversTypes['Journal']>, ParentType, ContextType, RequireFields<QueryGet_JournalArgs, 'id'>>;
+  get_journal_filters?: Resolver<ResolversTypes['JournalFilters'], ParentType, ContextType>;
+  get_journal_streak?: Resolver<ResolversTypes['JournalStreak'], ParentType, ContextType>;
   get_movie?: Resolver<Maybe<ResolversTypes['Movie']>, ParentType, ContextType, RequireFields<QueryGet_MovieArgs, 'id'>>;
   get_movie_filters?: Resolver<ResolversTypes['MovieFilters'], ParentType, ContextType>;
   get_my_books?: Resolver<ResolversTypes['BookPage'], ParentType, ContextType, Partial<QueryGet_My_BooksArgs>>;
+  get_my_journals?: Resolver<ResolversTypes['JournalResponse'], ParentType, ContextType, Partial<QueryGet_My_JournalsArgs>>;
   get_my_movies?: Resolver<ResolversTypes['MovieResponse'], ParentType, ContextType, Partial<QueryGet_My_MoviesArgs>>;
   get_my_poems?: Resolver<ResolversTypes['PoemResponse'], ParentType, ContextType, Partial<QueryGet_My_PoemsArgs>>;
   get_my_series?: Resolver<ResolversTypes['SeriesResponse'], ParentType, ContextType, Partial<QueryGet_My_SeriesArgs>>;
@@ -1122,6 +1551,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   get_poem?: Resolver<Maybe<ResolversTypes['Poem']>, ParentType, ContextType, RequireFields<QueryGet_PoemArgs, 'id'>>;
   get_series?: Resolver<Maybe<ResolversTypes['Series']>, ParentType, ContextType, RequireFields<QueryGet_SeriesArgs, 'id'>>;
   get_series_filters?: Resolver<ResolversTypes['SeriesFilters'], ParentType, ContextType>;
+  get_series_logs?: Resolver<Array<ResolversTypes['SeriesLog']>, ParentType, ContextType, RequireFields<QueryGet_Series_LogsArgs, 'series_id'>>;
   get_target_progress?: Resolver<ResolversTypes['TargetProgress'], ParentType, ContextType, Partial<QueryGet_Target_ProgressArgs>>;
   get_user_account?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryGet_User_AccountArgs, 'id'>>;
   get_user_books?: Resolver<Maybe<Array<Maybe<ResolversTypes['Book']>>>, ParentType, ContextType, RequireFields<QueryGet_User_BooksArgs, 'user_id'>>;
@@ -1143,6 +1573,7 @@ export type SeriesResolvers<ContextType = any, ParentType extends ResolversParen
   release_year?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   review?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   seasons?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  seasons_watched?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   started_from?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -1155,6 +1586,18 @@ export type SeriesFiltersResolvers<ContextType = any, ParentType extends Resolve
   genres?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   platforms?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   statuses?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+};
+
+export type SeriesLogResolvers<ContextType = any, ParentType extends ResolversParentTypes['SeriesLog'] = ResolversParentTypes['SeriesLog']> = {
+  _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  created_at?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  current_episode?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  date?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  episodes_watched?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  note?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  series_id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  updated_at?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  user_id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
 };
 
 export type SeriesResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['SeriesResponse'] = ResolversParentTypes['SeriesResponse']> = {
@@ -1190,9 +1633,13 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
   email_id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   first_name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   gender?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  inner_circle_email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  inner_circle_expires_at?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  inner_circle_started_at?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   last_name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   library?: Resolver<Maybe<ResolversTypes['Library']>, ParentType, ContextType>;
   mobile_no?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  plan?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   profile_pic?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   user_name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
 };
@@ -1201,10 +1648,18 @@ export type Resolvers<ContextType = any> = {
   AuthResponse?: AuthResponseResolvers<ContextType>;
   Book?: BookResolvers<ContextType>;
   BookFilters?: BookFiltersResolvers<ContextType>;
+  BookLog?: BookLogResolvers<ContextType>;
   BookPage?: BookPageResolvers<ContextType>;
   Cat?: CatResolvers<ContextType>;
   DashboardStats?: DashboardStatsResolvers<ContextType>;
   Dog?: DogResolvers<ContextType>;
+  InnerCircleStatus?: InnerCircleStatusResolvers<ContextType>;
+  Journal?: JournalResolvers<ContextType>;
+  JournalExpenseItem?: JournalExpenseItemResolvers<ContextType>;
+  JournalFilters?: JournalFiltersResolvers<ContextType>;
+  JournalResponse?: JournalResponseResolvers<ContextType>;
+  JournalStreak?: JournalStreakResolvers<ContextType>;
+  JournalTemplateBlock?: JournalTemplateBlockResolvers<ContextType>;
   Library?: LibraryResolvers<ContextType>;
   Movie?: MovieResolvers<ContextType>;
   MovieFilters?: MovieFiltersResolvers<ContextType>;
@@ -1217,6 +1672,7 @@ export type Resolvers<ContextType = any> = {
   Query?: QueryResolvers<ContextType>;
   Series?: SeriesResolvers<ContextType>;
   SeriesFilters?: SeriesFiltersResolvers<ContextType>;
+  SeriesLog?: SeriesLogResolvers<ContextType>;
   SeriesResponse?: SeriesResponseResolvers<ContextType>;
   Target?: TargetResolvers<ContextType>;
   TargetProgress?: TargetProgressResolvers<ContextType>;
