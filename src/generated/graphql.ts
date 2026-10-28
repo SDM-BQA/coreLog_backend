@@ -542,6 +542,7 @@ export type MutationDelete_User_AccountArgs = {
 
 export type MutationLogin_User_AccountArgs = {
   email_id: Scalars['String']['input'];
+  keep_signed_in?: InputMaybe<Scalars['Boolean']['input']>;
   password: Scalars['String']['input'];
 };
 

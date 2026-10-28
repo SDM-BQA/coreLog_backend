@@ -1,4 +1,4 @@
-import jwt, { JwtPayload } from "jsonwebtoken";
+import jwt, { JwtPayload, SignOptions } from "jsonwebtoken";
 import {
     jwt_access_secret,
     jwt_refresh_secret,
@@ -8,16 +8,12 @@ interface TokenPayload extends JwtPayload {
     userId: string;
 }
 
-export const sign_access_token = (payload: TokenPayload) => {
-    return jwt.sign(payload, jwt_access_secret, {
-        expiresIn: "2d",
-    });
+export const sign_access_token = (payload: TokenPayload, expiresIn: SignOptions["expiresIn"] = "2d") => {
+    return jwt.sign(payload, jwt_access_secret, { expiresIn });
 };
 
-export const sign_refresh_token = (payload: TokenPayload) => {
-    return jwt.sign(payload, jwt_refresh_secret, {
-        expiresIn: "7d",
-    });
+export const sign_refresh_token = (payload: TokenPayload, expiresIn: SignOptions["expiresIn"] = "7d") => {
+    return jwt.sign(payload, jwt_refresh_secret, { expiresIn });
 };
 
 export const verify_access_token = (token: string): TokenPayload | null => {

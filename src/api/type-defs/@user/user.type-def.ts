@@ -86,10 +86,12 @@ const user_type_def = gql`
     send_otp(email: String!): Boolean,
     verify_otp(email: String!, otp: String!): Boolean,
     send_journal_pin_reset_otp(email: String!): Boolean,
-    login_user_account(email_id: String!, password: String!): AuthResponse,
+    login_user_account(email_id: String!, password: String!, keep_signed_in: Boolean): AuthResponse,
     send_inner_circle_otp(email: String!): Boolean!,
     verify_inner_circle_otp(email: String!, otp: String!): InnerCircleStatus!,
-    cancel_inner_circle_membership(email: String!, otp: String!): InnerCircleStatus!
+    cancel_inner_circle_membership(email: String!, otp: String!): InnerCircleStatus!,
+    send_password_reset_otp(email: String!): Boolean!,
+    reset_password(email: String!, otp: String!, new_password: String!): Boolean!
   }
 `;
 

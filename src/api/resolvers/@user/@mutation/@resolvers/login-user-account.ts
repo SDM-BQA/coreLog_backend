@@ -4,7 +4,7 @@ import { sign_access_token, sign_refresh_token } from "../../../../../utils/jwt.
 
 export const login_user_account = async (
     _parent: any,
-    { email_id, password }: any
+    { email_id, password, keep_signed_in }: any
 ) => {
     try {
         // 1. Find user by email
@@ -21,8 +21,9 @@ export const login_user_account = async (
 
         // 3. Generate tokens
         const payload = { userId: user._id.toString() };
-        const accessToken = sign_access_token(payload);
-        const refreshToken = sign_refresh_token(payload);
+        // "Keep me signed in" issues long-lived tokens; otherwise short-lived session tokens
+        const accessToken = sign_access_token(payload, keep_signed_in ? "30d" : "1d");
+        const refreshToken = sign_refresh_token(payload, keep_signed_in ? "90d" : "7d");
 
         return {
             accessToken,

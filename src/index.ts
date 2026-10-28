@@ -11,6 +11,7 @@ import { BaseContext } from "@apollo/server";
 import { playground } from "./playground";
 import { makeExecutableSchema } from "@graphql-tools/schema";
 import path from "path";
+import mongoose from "mongoose";
 import { upload, handleImageUpload } from "./utils/file-upload.utils";
 
 
@@ -40,6 +41,16 @@ async function bootstrap() {
 
     app.get("/", (_req, res) => {
         res.json("MERN Backend Running... YEAHHHH BABBYYY!");
+    });
+
+    // Health check used by the website footer status indicator
+    app.get("/health", (_req, res) => {
+        const db_up = mongoose.connection.readyState === 1;
+        res.status(db_up ? 200 : 503).json({
+            status: db_up ? "operational" : "degraded",
+            database: db_up ? "up" : "down",
+            uptime: Math.round(process.uptime()),
+        });
     });
 
     // Static folder for uploaded images
